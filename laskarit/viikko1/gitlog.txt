@@ -1,0 +1,96 @@
+commit ead0c0e88cf5386ef1873ac9e1bf13ae76f98298
+Author: oskari83 <oskpelto@gmail.com>
+Date:   Tue Nov 8 15:42:24 2022 +0000
+
+    th11 done
+
+ tiedostoja/file2             | 0
+ tiedostoja/{file1 => file22} | 0
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+
+commit d5e1386c1e55831890b4b226071ecf3592f7761f
+Author: oskari83 <oskpelto@gmail.com>
+Date:   Tue Nov 8 15:39:45 2022 +0000
+
+    Lisätty file1,2,3
+
+ tiedostoja/file1 | 0
+ tiedostoja/file2 | 0
+ tiedostoja/file3 | 0
+ 3 files changed, 0 insertions(+), 0 deletions(-)
+
+commit 46922d6159cbb3806c0cd392825b0cd8cbb1436b
+Author: oskari83 <oskpelto@gmail.com>
+Date:   Tue Nov 8 15:19:49 2022 +0000
+
+    muutoksia
+
+ eka.txt    | 2 +-
+ kolmas.txt | 2 ++
+ 2 files changed, 3 insertions(+), 1 deletion(-)
+
+commit 7d3e214bbf874a1a25e2da7338177a970fb2dcd3
+Author: oskari83 <oskpelto@gmail.com>
+Date:   Tue Nov 8 15:18:45 2022 +0000
+
+    uudelleennimetty
+
+ tiedosto.txt => eka.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit e30e14506231a4a203b62b84bd948a9ed6e79c1a
+Author: oskari83 <oskpelto@gmail.com>
+Date:   Tue Nov 8 15:17:29 2022 +0000
+
+    poistettu toinen
+
+ toinen.txt | 1 -
+ 1 file changed, 1 deletion(-)
+
+commit 6019a820a432e83a3011e30355623cca4f7ffaa5
+Author: oskari83 <oskpelto@gmail.com>
+Date:   Tue Nov 8 15:16:04 2022 +0000
+
+    poistettu ja lisätty
+
+ tiedosto.txt | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+commit 9da7995ff0b31f68260b6ff45f097c34594b26c3
+Author: oskari83 <oskpelto@gmail.com>
+Date:   Tue Nov 8 15:15:25 2022 +0000
+
+    lisätty tekstiä
+
+ tiedosto.txt | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
+
+commit f958eca9b2583111d35f0a30363028c0d3bc529e
+Author: oskari83 <oskpelto@gmail.com>
+Date:   Tue Nov 8 15:13:32 2022 +0000
+
+    muutokset
+
+ kolmas.txt       | 1 +
+ stuff/jotain.txt | 0
+ toinen.txt       | 1 +
+ 3 files changed, 2 insertions(+)
+
+commit 9c6a33eb98c6dab80b199df7f49883c48fbbe46e
+Author: oskari83 <oskpelto@gmail.com>
+Date:   Tue Nov 8 15:05:45 2022 +0000
+
+    muutos ja lisäys
+
+ tiedosto.txt | 1 +
+ toinen.txt   | 0
+ 2 files changed, 1 insertion(+)
+
+commit 7b96edcc94f54d45e62c99f9d1cda7934bdf71d7
+Author: oskari83 <oskpelto@gmail.com>
+Date:   Tue Nov 8 15:04:23 2022 +0000
+
+    tiedosto.txt luotu
+
+ tiedosto.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
