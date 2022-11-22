@@ -2,14 +2,48 @@
 
 Kurssirepositorio aineopintojen kurssile Ohjelmistotekniikka **(5op)**
 
-### Linkit Viikon 1 tiedostoihin
+## PasswordManager App
 
-[gitlog.txt](https://github.com/oskari83/ot-harjoitustyo/blob/master/laskarit/viikko1/gitlog.txt)
+Sovellus auttaa käyttäjää pitämään salasanansa muistissa ja turvassa.
 
-[komentorivi.txt](https://github.com/oskari83/ot-harjoitustyo/blob/master/laskarit/viikko1/komentorivi.txt)
+## Dokumentaatio
 
-### Linkit Vaatimusmäärittelyyn ja tuntikirjanpitoon
+[Vaatimusmäärittely](https://github.com/oskari83/ot-harjoitustyo/blob/master/pwmanager-app/dokumentaatio/vaatimusmaarittely.md)
 
-[Vaatimusmäärittely](https://github.com/oskari83/ot-harjoitustyo/blob/master/dokumentaatio/vaatimusmaarittely.md)
+[Tuntikirjanpito](https://github.com/oskari83/ot-harjoitustyo/blob/master/pwmanager-app/dokumentaatio/tuntikirjanpito.md)
 
-[Tuntikirjanpito](https://github.com/oskari83/ot-harjoitustyo/blob/master/dokumentaatio/tuntikirjanpito.md)
+[ChangeLogi](https://github.com/oskari83/ot-harjoitustyo/blob/master/pwmanager-app/dokumentaatio/changelog.md)
+
+## Ohjelman Asennus
+
+Asenna riippuvuudet komennolla:
+
+```bash
+poetry install
+```
+
+## Komentorivitoiminnot
+
+### Ohjelman suorittaminen
+
+Ohjelman pystyy käynnistämään komennolla:
+
+```bash
+poetry run invoke start
+```
+
+### Testaus
+
+Testit suoritetaan komennolla:
+
+```bash
+poetry run invoke test
+```
+
+### Testikattavuus
+
+Testikattavuusraportin generoituu komennolla:
+
+```bash
+poetry run invoke coverage-report
+```

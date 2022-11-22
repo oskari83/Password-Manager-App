@@ -2,3 +2,8 @@ laskarit/viikko2/unicafe/src/__pycache__/
 laskarit/viikko2/unicafe/src/tests/__pycache__/
 .coverage
 htmlcov
+pwmanager-app/.pytest_cache
+pwmanager-app/htmlcov
+pwmanager-app/.venv
+pwmanager-app/src/__pycache__
+pwmanager-app/src/test/__pycache__
