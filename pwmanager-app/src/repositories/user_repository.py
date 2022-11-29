@@ -33,7 +33,6 @@ class UserRepository:
         sql = "SELECT * FROM users WHERE username=?"
         cursor.execute(sql, (username,))
         rows = cursor.fetchall()
-        print(rows)
         if len(rows)>=1:
             return get_user_by_row(rows[0])
         else:

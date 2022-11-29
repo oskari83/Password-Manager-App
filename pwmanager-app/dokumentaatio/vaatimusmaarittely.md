@@ -12,19 +12,23 @@ Sovelluksella on vain yhdenlaisia käyttäjiä, sillä tarvetta ylläpitäjälle
 
 ### Turvallisuus
 
-- Aluksi mahdollisuus luoda käyttäjätili tai kirjautua sisään
-- Klikatessa käyttäjätilin luontia pyytää sovellus sähköpostin ja salasanan, ja luo sitten tilin
-- Sisäänkirjautuessa pyydetään sähköpostia ja salasanaa
-  - jos yhdistelmä on oikea, pääsee käyttäjä sovelluksen pääkäyttöliittymään
-  - jos yhdistelmä on väärä, ilmoittaa sovellus tästä eikä päästä käyttäjää kirjautumaan
+- Aluksi mahdollisuus luoda käyttäjätili tai kirjautua sisään (TEHTY)
+- Klikatessa käyttäjätilin luontia pyytää sovellus käyttäjätunnuksen ja salasanan, ja luo sitten tilin (TEHTY)
+- Sisäänkirjautuessa pyydetään käyttäjätunnusta ja salasanaa (TEHTY)
+  - jos yhdistelmä on oikea, pääsee käyttäjä sovelluksen pääkäyttöliittymään (TEHTY)
+  - jos yhdistelmä on väärä, ilmoittaa sovellus tästä eikä päästä käyttäjää kirjautumaan (TEHTY)
 
 ### Tallennus
 
-- Tallennetut salasanat ovat tietokannassa
-- Päänäkymässä on lista käyttäjän eri sovelluksista joista hänellä on salasana tallessa
-- Sovelluksen nimen vieressä on tähän liittyvä salasana
-- Päänäkymässä on myös mahdollisuus lisätä uusi sovellus, joka pyytää sovelluksen nimen ja salasanan
-- Päänäkymästä voi uloskirjautua
+- Tallennetut salasanat ovat tietokannassa (TEHTY)
+- Päänäkymässä on lista käyttäjän eri sovelluksista joista hänellä on salasana tallessa (TEHTY)
+- Sovelluksen nimen vieressä on tähän liittyvä salasana (TEHTY)
+- Päänäkymässä on myös mahdollisuus lisätä uusi sovellus, joka pyytää sovelluksen nimen ja salasanan (TEHTY)
+- Päänäkymästä voi uloskirjautua (TEHTY)
+
+### Käyttäjäkokemus
+
+- sovellus toimii graafisella käyttöliittymällä
 
 ## Jatkokehitysideat
 

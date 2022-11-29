@@ -1,5 +1,5 @@
 from consoleIO import ConsoleIO
-from user_service import UserService
+from services.user_service import UserService
 
 class PasswordManagerApp:
     def __init__(self):
@@ -70,9 +70,12 @@ class PasswordManagerApp:
         passwordInput = self._io.cin("Password: ")
         check = self._io.cin("Confirm (y/n): ")
         if(check=="" or check=="y" or check=="yes"):
-            self._user_service.create_account(usernameInput,passwordInput)
+            resp = self._user_service.create_account(usernameInput,passwordInput)
             self._io.newline()
-            self._io.cout("Account created successfully, you can now log-in with your credentials!")
+            if resp=="Account created successfully":
+                self._io.cout("Account created successfully, you can now log-in with your credentials!")
+            else:
+                self._io.cout(resp)
         else:
             self._io.cout("No worries, we will cancel that!")
 
