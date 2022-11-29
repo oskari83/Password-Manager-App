@@ -35,8 +35,7 @@ class UserRepository:
         rows = cursor.fetchall()
         if len(rows)>=1:
             return get_user_by_row(rows[0])
-        else:
-            return None
+        return None
 
 user_repository = UserRepository(get_database_connection())
     

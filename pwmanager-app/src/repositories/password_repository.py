@@ -22,10 +22,10 @@ class PasswordRepository:
         self._connection.commit()
         print('Deleted', cursor.rowcount, 'records from the table')
 
-    def find_password(self, appName, username):
+    def find_password(self, app_name, username):
         cursor = self._connection.cursor()
         sql = "SELECT * FROM passwords WHERE username=? AND app=?"
-        cursor.execute(sql, (username,appName))
+        cursor.execute(sql, (username,app_name))
         rows = cursor.fetchall()
         return get_password_by_row(rows[0])
 

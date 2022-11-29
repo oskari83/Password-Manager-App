@@ -1,4 +1,4 @@
-from consoleIO import ConsoleIO
+from console_io import ConsoleIO
 from services.user_service import UserService
 
 class PasswordManagerApp:
@@ -14,11 +14,11 @@ class PasswordManagerApp:
             if self._user:
                 self.print_home_instructions()
                 command = self._io.cin("Command: ")
-                if(command=="1"):
+                if command=="1":
                     self.add_password_entry()
-                elif(command=="2"):
+                elif command=="2":
                     self.delete_password_entry()
-                elif(command=="3"):
+                elif command=="3":
                     self._io.newline()
                     self._user = None
                     self._io.cout("Log-out successful!")
@@ -26,11 +26,11 @@ class PasswordManagerApp:
                 self.print_auth_instructions()
                 command = self._io.cin("Command: ")
 
-                if(command=="1"):
+                if command=="1":
                     self.login()
-                elif(command=="2"):
+                elif command=="2":
                     self.create_account()
-                elif(command=="3"):
+                elif command=="3":
                     self._io.newline()
                     self._io.cout("Bye, see you soon!")
                     break
@@ -66,14 +66,16 @@ class PasswordManagerApp:
     def create_account(self):
         self._io.newline()
         self._io.cout("Please input a username and password to create your account:")
-        usernameInput = self._io.cin("Username: ")
-        passwordInput = self._io.cin("Password: ")
+        username_input = self._io.cin("Username: ")
+        password_input = self._io.cin("Password: ")
         check = self._io.cin("Confirm (y/n): ")
         if(check=="" or check=="y" or check=="yes"):
-            resp = self._user_service.create_account(usernameInput,passwordInput)
+            resp = self._user_service.create_account(username_input,password_input)
             self._io.newline()
             if resp=="Account created successfully":
-                self._io.cout("Account created successfully, you can now log-in with your credentials!")
+                self._io.cout(
+                    "Account created successfully, you can now log-in with your credentials!"
+                    )
             else:
                 self._io.cout(resp)
         else:
@@ -82,9 +84,9 @@ class PasswordManagerApp:
     def login(self):
         self._io.newline()
         self._io.cout("Please input your username and password: ")
-        usernameInput = self._io.cin("Username: ")
-        passwordInput = self._io.cin("Password: ")
-        user = self._user_service.authenticate(usernameInput,passwordInput)
+        username_input = self._io.cin("Username: ")
+        password_input = self._io.cin("Password: ")
+        user = self._user_service.authenticate(username_input,password_input)
         if user:
             self._user = user
             self._io.cout("Logged in successfully!")
@@ -96,18 +98,18 @@ class PasswordManagerApp:
         self._io.newline()
         self._io.cout("App - Password")
         self._io.cout("-------------------------------------------------")
-        ls = self._user_service.get_all_user_passwords()
-        for item in ls:
+        list_of_password_items = self._user_service.get_all_user_passwords()
+        for item in list_of_password_items:
             self._io.cout(f"{item.app} - {item.password}")
 
     def add_password_entry(self):
         self._io.newline()
         self._io.cout("Please input app name and password:")
-        appInput = self._io.cin("App: ")
-        passwordInput = self._io.cin("Password: ")
+        app_input = self._io.cin("App: ")
+        password_input = self._io.cin("Password: ")
         check = self._io.cin("Confirm (y/n): ")
-        if(check=="" or check=="y" or check=="yes"):
-            self._user_service.add_password(appInput,passwordInput)
+        if check=="" or check=="y" or check=="yes":
+            self._user_service.add_password(app_input,password_input)
             self._io.newline()
             self._io.cout("Password item added successfully!")
         else:
@@ -116,10 +118,10 @@ class PasswordManagerApp:
     def delete_password_entry(self):
         self._io.newline()
         self._io.cout("Please input app name associated with entry: ")
-        appInput = self._io.cin("App: ")
+        app_input = self._io.cin("App: ")
         check = self._io.cin("Confirm (y/n): ")
-        if(check=="" or check=="y" or check=="yes"):
-            status = self._user_service.delete_password(appInput)
+        if check=="" or check=="y" or check=="yes":
+            status = self._user_service.delete_password(app_input)
             self._io.newline()
             self._io.cout(status)
         else:
