@@ -19,10 +19,10 @@ class UserService:
     def create_account(self,username_input, password_input):
         username_not_available = self._user_repo.find_user(username_input)
         if username_not_available:
-            return "Error, username is taken"
+            return None
         new_user = User(username_input,password_input)
-        self._user_repo.insert_user(new_user)
-        return "Account created successfully"
+        user = self._user_repo.insert_user(new_user)
+        return user
 
     def authenticate(self, username, password_input):
         user_account = self._user_repo.find_user(username)
@@ -50,3 +50,5 @@ class UserService:
     def get_all_user_passwords(self):
         pw_list = self._password_repo.find_all(self._current_user.username)
         return pw_list
+
+user_service = UserService()

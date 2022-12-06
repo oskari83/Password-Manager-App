@@ -1,4 +1,15 @@
-from app import PasswordManagerApp
+#from app import PasswordManagerApp
+from tkinter import Tk
+from ui.ui import UI
 
-app = PasswordManagerApp()
-app.run()
+def main():
+	window = Tk()
+	window.title("Password Manager")
+
+	ui_view = UI(window)
+	ui_view.start()
+
+	window.mainloop()
+
+if __name__ == "__main__":
+	main()
