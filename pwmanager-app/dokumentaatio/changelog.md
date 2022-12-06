@@ -20,3 +20,11 @@
 - Testi lisätty että samalla käyttäjänimellä ei voi tehdä kahta käyttäjätiliä
 - Testi lisätty että väärällä salasanalla ei voi kirjautua
 - Testi lisätty että UserRepository löytää kaikkien käyttäjien tiedot
+
+## Viikko 5
+
+- UI luokka luotu tkinter käyttöliittymää toteuttamaan
+- LoginView ja CreateAccountView luokat luotu
+- Visuaalinen käyttöliittymä toteutettu sisäänkirjautumiselle
+- Visuaalinen käyttöliittymä toteutettu käyttäjän luomiselle
+- UserService luokkaan toteutettu get_current_user ja logout metodit

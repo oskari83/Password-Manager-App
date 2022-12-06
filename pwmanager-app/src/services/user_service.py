@@ -31,6 +31,9 @@ class UserService:
         self._current_user = user_account
         return user_account
 
+    def logout(self):
+        self._current_user = None
+
     def add_password(self, app_input,password_input):
         if not self._current_user:
             return None
@@ -50,5 +53,8 @@ class UserService:
     def get_all_user_passwords(self):
         pw_list = self._password_repo.find_all(self._current_user.username)
         return pw_list
+
+    def get_current_user(self):
+        return self._current_user
 
 user_service = UserService()

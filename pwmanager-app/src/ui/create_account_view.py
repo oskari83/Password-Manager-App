@@ -35,7 +35,7 @@ class CreateAccountView:
     def _initialize_username_field(self):
         username_label = ttk.Label(master=self._frame, text="Username")
         self._username_input = ttk.Entry(master=self._frame)
-        username_label.grid(padx=100, pady=(40,2),sticky=constants.W)
+        username_label.grid(padx=100, pady=(2,2),sticky=constants.W)
         self._username_input.grid(padx=100, pady=0,sticky=constants.EW)
 
     def _initialize_password_field(self):
@@ -46,6 +46,10 @@ class CreateAccountView:
 
     def _initialize(self):
         self._frame = ttk.Frame(master=self._root)
+
+        view_label = ttk.Label(master=self._frame, text="Create New User Account")
+        view_label.grid(padx=100, pady=(40,15),sticky=constants.W)
+
         self._initialize_username_field()
         self._initialize_password_field()
 
@@ -57,7 +61,7 @@ class CreateAccountView:
 
         login_button = ttk.Button(
             master = self._frame,
-            text="Login",
+            text="Back to login",
             command=self._handle_show_login_view
         )
 

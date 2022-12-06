@@ -3,13 +3,13 @@ from tkinter import Tk
 from ui.ui import UI
 
 def main():
-	window = Tk()
-	window.title("Password Manager")
+    window = Tk()
+    window.title("Password Manager")
 
-	ui_view = UI(window)
-	ui_view.start()
+    ui_view = UI(window)
+    ui_view.start()
 
-	window.mainloop()
+    window.mainloop()
 
 if __name__ == "__main__":
-	main()
+    main()

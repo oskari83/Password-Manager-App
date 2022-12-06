@@ -1,5 +1,6 @@
 from ui.login_view import LoginView
 from ui.create_account_view import CreateAccountView
+from ui.passwords_view import PasswordsView
 
 class UI:
     def __init__(self, root):
@@ -26,7 +27,8 @@ class UI:
 
     def _show_passwords_view(self):
         self._hide_current_view()
-        self._current_view = None 
+        self._current_view = PasswordsView(self._root, self._show_login_view)
+        self._current_view.pack()
 
     def _show_create_account_view(self):
         self._hide_current_view()

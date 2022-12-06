@@ -9,12 +9,13 @@ class TestUserService(unittest.TestCase):
 
     def test_account_creation(self):
         response = self.service.create_account("username2","password2")
-        self.assertEqual(response, "Account created successfully")
+        self.assertNotEqual(response, None)
+        self.assertEqual(response.username, "username2")
 
     def test_cannot_create_duplicate_account(self):
         self.service.create_account("username3","password3")
         response = self.service.create_account("username3","password333")
-        self.assertEqual(response, "Error, username is taken")
+        self.assertEqual(response, None)
     
     def test_login(self):
         self.service.create_account("username2","password2")
