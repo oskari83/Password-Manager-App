@@ -60,11 +60,13 @@ poetry run invoke test
 
 ### Testikattavuus
 
-Testikattavuusraportin generoituu komennolla:
+Testikattavuusraportti generoituu komennolla:
 
 ```bash
 poetry run invoke coverage-report
 ```
+
+### Linttaus
 
 Linttauksen voi suorittaa komennolla:
 
