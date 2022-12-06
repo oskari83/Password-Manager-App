@@ -10,7 +10,7 @@ Sovellus auttaa käyttäjää pitämään salasanansa muistissa ja turvassa.
 
 ## Uusin lähdekoodi
 
-[Release](https://github.com/oskari83/ot-harjoitustyo/releases/tag/viikko5)
+[Release](https://github.com/oskari83/ot-harjoitustyo/releases/tag/viikko5v2)
 
 ## Dokumentaatio
 
