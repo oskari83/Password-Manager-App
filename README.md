@@ -6,6 +6,10 @@ Kurssirepositorio aineopintojen kurssile Ohjelmistotekniikka **(5op)**
 
 Sovellus auttaa käyttäjää pitämään salasanansa muistissa ja turvassa.
 
+## Uusin lähdekoodi
+
+[Release](https://github.com/oskari83/ot-harjoitustyo/releases/tag/viikko5)
+
 ## Dokumentaatio
 
 [Vaatimusmäärittely](https://github.com/oskari83/ot-harjoitustyo/blob/master/pwmanager-app/dokumentaatio/vaatimusmaarittely.md)
