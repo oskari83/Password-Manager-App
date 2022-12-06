@@ -6,6 +6,8 @@ Kurssirepositorio aineopintojen kurssile Ohjelmistotekniikka **(5op)**
 
 Sovellus auttaa käyttäjää pitämään salasanansa muistissa ja turvassa.
 
+(HUOM, itse sovellus on kansiossa "pwmanager-app")
+
 ## Uusin lähdekoodi
 
 [Release](https://github.com/oskari83/ot-harjoitustyo/releases/tag/viikko5)
@@ -21,6 +23,8 @@ Sovellus auttaa käyttäjää pitämään salasanansa muistissa ja turvassa.
 [Arkkitehtuurikuvaus](https://github.com/oskari83/ot-harjoitustyo/blob/master/pwmanager-app/dokumentaatio/arkkitehtuuri.md)
 
 ## Ohjelman Asennus
+
+Siirry kansioon "pwmanager-app"
 
 Asenna riippuvuudet komennolla:
 
@@ -60,4 +64,10 @@ Testikattavuusraportin generoituu komennolla:
 
 ```bash
 poetry run invoke coverage-report
+```
+
+Linttauksen voi suorittaa komennolla:
+
+```bash
+poetry run invoke lint
 ```

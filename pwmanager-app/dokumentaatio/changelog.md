@@ -25,6 +25,10 @@
 
 - UI luokka luotu tkinter käyttöliittymää toteuttamaan
 - LoginView ja CreateAccountView luokat luotu
+- PasswordsView ja PasswordListView luokat luotu
 - Visuaalinen käyttöliittymä toteutettu sisäänkirjautumiselle
 - Visuaalinen käyttöliittymä toteutettu käyttäjän luomiselle
+- Visuaalinen käyttöliittymä toteutettu salasanan luomiselle sekä poistamiselle
 - UserService luokkaan toteutettu get_current_user ja logout metodit
+- Testi lisätty että käyttäjä voi lisätä salasanan
+- Testi lisätty että käyttäjä voi poistaa salasanan

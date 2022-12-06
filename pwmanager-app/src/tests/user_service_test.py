@@ -26,3 +26,16 @@ class TestUserService(unittest.TestCase):
         self.service.create_account("username2","password2")
         response = self.service.authenticate("username2","vaarasalasana")
         self.assertEqual(response, None)
+
+    def test_password_addition_works(self):
+        self.service.create_account("username5","password5")
+        self.service.authenticate("username5","password5")
+        response = self.service.add_password("testApp", "superSafePassword")
+        self.assertEqual(response.app,"testApp")
+
+    def test_password_removal_works(self):
+        self.service.create_account("username5","password5")
+        self.service.authenticate("username5","password5")
+        self.service.add_password("testApp", "superSafePassword")
+        response = self.service.delete_password("testApp")
+        self.assertEqual(response,"Password entry deleted successfully")
