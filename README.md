@@ -11,6 +11,7 @@ Sovellus auttaa käyttäjää pitämään salasanansa muistissa ja turvassa.
 ## Uusin lähdekoodi
 
 [Release](https://github.com/oskari83/ot-harjoitustyo/releases/tag/viikko5v2)
+(HUOM, error-notifikaatiot ja kaikki mahdolliset virhatilanteet eivät vielä ole käyttöliittymään implementoitu. Eli toisinsanoen esim. sisäänkirjautuessa jos väärä salasana niin asia ei vielä ilmene mitenkään)
 
 ## Dokumentaatio
 

@@ -28,7 +28,7 @@ Sovelluksella on vain yhdenlaisia käyttäjiä, sillä tarvetta ylläpitäjälle
 
 ### Käyttäjäkokemus
 
-- sovellus toimii graafisella käyttöliittymällä (TEHTY)
+- sovellus toimii graafisella käyttöliittymällä (90% TEHTY)
 
 ## Jatkokehitysideat
 
