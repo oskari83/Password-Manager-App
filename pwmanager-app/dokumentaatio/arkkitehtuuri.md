@@ -39,14 +39,24 @@ Sovellus tallentaa kaiken datan pysyvästi Sqlite tietokantaan. Tietokantaa käs
 
 ### Sisäänkirjautuminen
 
-Käyttäjä voi kirjautua sisään sovellukseen kirjoittamalla merkkijonoja käyttäjänimeksi ja salasanaksi. Tämän jälkeen jos käyttäjä painaa nappia, kutsuu `UI` luokan hallitsema `LoginView` luokkaa annetuilla merkkijonoilla `UserService` luokan `authenticate(username,password_input)` metodia, joka taas kutsuu `UserRepository` luokkaa metodilla `find_user(username_input)` hakeakseen käyttäjänimeen liitetyn salasanan tietokannasta. `UserService` sitten vertaa näitä salasanoja keskenään, ja jos nämä ovat samat, tallettaa käyttäjän muuttujaan ja palauttaa `User` luokan instanssin käyttöliittymälle indikoiden että sisäänkirjautuminen onnistui. Tämän jälkeen `UI` luokka tietää vaihtaa näkymää `PasswordsView` luokan määritellemäksi eli päänäkymäksi. 
+Käyttäjä voi kirjautua sisään sovellukseen kirjoittamalla merkkijonoja käyttäjänimeksi ja salasanaksi. Tämän jälkeen jos käyttäjä painaa nappia, kutsuu `UI` luokan hallitsema `LoginView` luokkaa annetuilla merkkijonoilla `UserService` luokan `authenticate(username,password_input)` metodia, joka taas kutsuu `UserRepository` luokkaa metodilla `find_user(username_input)` hakeakseen käyttäjänimeen liitetyn salasanan tietokannasta. `UserService` sitten vertaa näitä salasanoja keskenään, ja jos nämä ovat samat, tallettaa käyttäjän muuttujaan ja palauttaa `User` luokan instanssin käyttöliittymälle indikoiden että sisäänkirjautuminen onnistui. Tämän jälkeen `UI` luokka tietää vaihtaa näkymää `PasswordsView` luokan määritellemäksi eli päänäkymäksi.
+
+Seuraava sekvenssidiagrammi havannoi toimintaa:
 
 ![alt text](https://github.com/oskari83/ot-harjoitustyo/blob/master/pwmanager-app/pictures/login_sequence.png?raw=true)
 
 ### Salasanan lisääminen
 
-Käyttäjä voi lisätä salasanan sovellukseen antamalla sovelluksen nimen ja salasanan merkkijonoina ja sitten painamalla Add-nappia käyttöliittymässä. Mahdollisesti käyttäjä voi myös autogeneroida salasanan painamalla ensin Generate-nappia. Tämän jälkeen kutsuu `UI` luokan hallitsema `PasswordsView` luokka `UserService` luokkaa metodilla `add_password(app_input, password_input)`, joka taas paketoi tiedon `Password` luokan instanssiin ja lähettää datan eteenpäin `PasswordRepository` luokalle metodilla `inser_password(password)`, joka vihdoin tallettaa salasanan tietokantaan. Tämän onnistumisesta indikoi sekä `PasswordRepository` ja `UserService` palauttamalla `Password` luokan instanssin takaisinpäin. 
+Käyttäjä voi lisätä salasanan sovellukseen antamalla sovelluksen nimen ja salasanan merkkijonoina ja sitten painamalla Add-nappia käyttöliittymässä. Mahdollisesti käyttäjä voi myös autogeneroida salasanan painamalla ensin Generate-nappia. Tämän jälkeen kutsuu `UI` luokan hallitsema `PasswordsView` luokka `UserService` luokkaa metodilla `add_password(app_input, password_input)`, joka taas paketoi tiedon `Password` luokan instanssiin ja lähettää datan eteenpäin `PasswordRepository` luokalle metodilla `insert_password(password)`, joka vihdoin tallettaa salasanan tietokantaan. Tämän onnistumisesta indikoi sekä `PasswordRepository` ja `UserService` palauttamalla `Password` luokan instanssin takaisinpäin. `PasswordsView` sitten poistaa mahdollisen error-notifikaation ja uuddelleen renderöi listan salasanoja kutsumalla `_initialize_password_list()` funktiota. 
+
+Seuraava sekvenssidiagrammi havannoi toimintaa:
+
+![alt text](https://github.com/oskari83/ot-harjoitustyo/blob/master/pwmanager-app/pictures/password_add.png?raw=true)
 
 ### Uloskirjautuminen
 
-Käyttäjä voi kirjautua ulos painamalla Logout-nappia päänäkymässä, jonka jälkeen UI-luokan hallitsema `PasswordsView` luokka kutsuu `UserService` luokan `logout()` funktiota joka kirjaa käyttäjän ulos poistamalla käyttäjän tämänhetkisen käyttäjän muuttujasta. Tämän jälkeen `UI` luokka automaattisesti vaihtaa näkymää sisäänkirjautumisnäkymään. 
+Käyttäjä voi kirjautua ulos painamalla Logout-nappia päänäkymässä, jonka jälkeen UI-luokan hallitsema `PasswordsView` luokka kutsuu `UserService` luokan `logout()` funktiota joka kirjaa käyttäjän ulos poistamalla käyttäjän tämänhetkisen käyttäjän muuttujasta. Tämän jälkeen `UI` luokka automaattisesti vaihtaa näkymää sisäänkirjautumisnäkymään kutsumalla `_show_login_view()` metodia. 
+
+Seuraava sekvenssidiagrammi havannoi toimintaa:
+
+![alt text](https://github.com/oskari83/ot-harjoitustyo/blob/master/pwmanager-app/pictures/logout_sequence.png?raw=true)
