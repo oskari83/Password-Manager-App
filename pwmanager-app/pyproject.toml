@@ -9,6 +9,8 @@ packages = [{include = "pwmanager_app"}]
 [tool.poetry.dependencies]
 python = "^3.8"
 invoke = "^1.7.3"
+sv-ttk = "^2.4"
+ttkthemes = "^3.2.2"
 
 
 [tool.poetry.group.dev.dependencies]
