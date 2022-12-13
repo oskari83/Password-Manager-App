@@ -15,13 +15,15 @@ Sovellus auttaa käyttäjää pitämään salasanansa muistissa ja turvassa.
 
 ## Dokumentaatio
 
+[Käyttöohje](https://github.com/oskari83/ot-harjoitustyo/blob/master/pwmanager-app/dokumentaatio/kayttoohje.md)
+
 [Vaatimusmäärittely](https://github.com/oskari83/ot-harjoitustyo/blob/master/pwmanager-app/dokumentaatio/vaatimusmaarittely.md)
+
+[Arkkitehtuurikuvaus](https://github.com/oskari83/ot-harjoitustyo/blob/master/pwmanager-app/dokumentaatio/arkkitehtuuri.md)
 
 [Tuntikirjanpito](https://github.com/oskari83/ot-harjoitustyo/blob/master/pwmanager-app/dokumentaatio/tuntikirjanpito.md)
 
-[ChangeLogi](https://github.com/oskari83/ot-harjoitustyo/blob/master/pwmanager-app/dokumentaatio/changelog.md)
-
-[Arkkitehtuurikuvaus](https://github.com/oskari83/ot-harjoitustyo/blob/master/pwmanager-app/dokumentaatio/arkkitehtuuri.md)
+[ChangeLog](https://github.com/oskari83/ot-harjoitustyo/blob/master/pwmanager-app/dokumentaatio/changelog.md)
 
 ## Ohjelman Asennus
 

@@ -31,7 +31,7 @@ poetry run invoke start
 Sovellus näyttää käynnistyksen jälkeen seuraavalta:
 ![alt text](https://github.com/oskari83/ot-harjoitustyo/blob/master/pwmanager-app/pictures/ohje1.png?raw=true)
 
-Sovellukseen täytyy ensin luoda käyttäjätunnus painamalla "Create Account"-nappia.
+Sovellukseen täytyy ensin luoda käyttäjätunnus painamalla "Create Account"-nappia. Jos sinulla on jo käyttäjätunnus, voit ohittaa seuraavan askeleen.
 
 Tämän jälkeen sovellus näyttää seuraavalta:
 ![alt text](https://github.com/oskari83/ot-harjoitustyo/blob/master/pwmanager-app/pictures/ohje2.png?raw=true)
