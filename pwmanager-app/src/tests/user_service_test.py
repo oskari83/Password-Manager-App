@@ -39,3 +39,11 @@ class TestUserService(unittest.TestCase):
         self.service.add_password("testApp", "superSafePassword")
         response = self.service.delete_password("testApp")
         self.assertEqual(response,"Password entry deleted successfully")
+
+    def test_password_list_return_works(self):
+        self.service.create_account("username5","password5")
+        self.service.authenticate("username5","password5")
+        self.service.add_password("testApp", "superSafePassword")
+        self.service.add_password("testApp2", "superSafePassword2")
+        pwlist = self.service.get_all_user_passwords()
+        self.assertEqual(len(pwlist),2)

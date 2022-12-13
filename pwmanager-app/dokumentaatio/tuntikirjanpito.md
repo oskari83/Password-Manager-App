@@ -7,4 +7,5 @@
 | 28.11. | 1    | tietokannan eli sqliten lisääminen aloitettu |
 | 29.11. | 5    | käyttäjätunnukset tietokannassa, logiikka ja tallennus tietokantaan salasanojen lisäämiselle lisätty |
 | 6.12. | 5    | vanha konsoli-käyttöliittymä poistettu ja uusi visuaalinen käyttöliittymä koodattu sen tilalle tkinter kirjastoa hyödyntäen |
-| yht   | 15   | |
+| 13.12. | 5    | visuaalinen käyttöliittymä viimeistelty, salasanan kopioiminen ja autogeneroiminen lisätty |
+| yht   | 20   | |

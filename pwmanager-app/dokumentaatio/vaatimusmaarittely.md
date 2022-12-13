@@ -28,11 +28,11 @@ Sovelluksella on vain yhdenlaisia käyttäjiä, sillä tarvetta ylläpitäjälle
 
 ### Käyttäjäkokemus
 
-- sovellus toimii graafisella käyttöliittymällä (90% TEHTY)
+- sovellus toimii graafisella käyttöliittymällä (TEHTY)
+- Päänäkymässä sovellusten nimien vieressä on myös kopiointi nappi, joka kopio salasanan clip-boardiin (TEHTY)
+- Kun käyttäjä on lisäämässä uuden sovelluksen, pystyy hän autogeneroimaan salasanan sen sijaan että hän keksii itse (TEHTY)
 
 ## Jatkokehitysideat
 
 - Sovelluksen nimen vieressä on nappi salasanan vaihtamista varten
-- Päänäkymässä sovellusten nimien vieressä on myös kopiointi nappi, joka kopio salasanan clip-boardiin
 - Päänäkymässä sovellusten nimien vieressä on myös sovellukseen liittyvä sähköpostiosoite/käyttäjänimi
-- Kun käyttäjä on lisäämässä uuden sovelluksen, pystyy hän autogeneroimaan salasanan sen sijaan että hän keksii itse

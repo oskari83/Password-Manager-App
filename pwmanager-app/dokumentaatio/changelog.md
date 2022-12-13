@@ -32,3 +32,14 @@
 - UserService luokkaan toteutettu get_current_user ja logout metodit
 - Testi lisätty että käyttäjä voi lisätä salasanan
 - Testi lisätty että käyttäjä voi poistaa salasanan
+
+## Viikko 6
+
+- TKInter käyttöliittymään lisätty custom theme ttkthemes pakettia hyödyntäen
+- käyttöliittymään lisätty Error notifikaatio jos salasana/käyttäjänimi väärin
+- käyttöliittymään lisätty Error notifikaatio jos käyttäjätunnuksen luonnissa nimi tai salasana input tyhjiä
+- käyttöliittymään lisätty Error notifikaatio jos käyttäjätunnuksen luonnissa nimi on jo varattu
+- käyttöliittymään lisätty Error notifikaatio jos salasanan lisäyksessä app tai salasana input tyhjiä
+- PasswordsView luokkaan luotu metodi _handle_generate_password joka autogeneroi 16 characterin random salasanan
+- PasswordListView luokkaan luotu metodi _copy_to_clipboard_handler joka kopioi halutun salasanan clipboardiin
+- Testi lisätty että salasanojen hakeminen tietyllä käyttäjällä palauttaa kaikki käyttäjän salasanat
