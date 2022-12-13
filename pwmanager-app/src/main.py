@@ -1,9 +1,10 @@
-#from app import PasswordManagerApp
-from tkinter import Tk
-from ui.ui import UI
 from ttkthemes import ThemedTk
+from ui.ui import UI
 
 def main():
+    """Sovelluksen main funktio joka luo Tkinter ikkunan, ja 
+    käynnistää käyttöliittymän (eli käynnistää sovelluksen).
+    """
     window = ThemedTk(theme="breeze")
     window.title("Password Manager")
 

@@ -3,6 +3,9 @@ from tkinter.font import BOLD, Font
 from services.user_service import user_service
 
 class LoginView:
+    """Luokka sovellukseen sisäänkirjautumiselle käyttöliittymässä.
+    """
+
     def __init__(self, root, login_handler, show_create_account_view_handler):
         self._root = root
         self._login_handler = login_handler
@@ -20,12 +23,21 @@ class LoginView:
         self._initialize()
 
     def pack(self):
+        """Näyttää elementit käyttöliittymässä"""
+
         self._frame.pack(fill=constants.X)
 
     def destroy(self):
+        """Poistaa elementit käyttöliittymästä"""
+
         self._frame.destroy()
 
     def _handle_login(self):
+        """Välittää käyttöliittymään kirjoitetun salasanan ja käyttäjänimen
+        UserService luokalle jotta voidaan joko kirjautua sisään tai näyttää
+        error-viesti että tunnukset ovat väärät.
+        """
+        
         username = self._username_input.get()
         password = self._password_input.get()
 
@@ -50,7 +62,7 @@ class LoginView:
 
     def _initialize_password_field(self):
         password_label = ttk.Label(master=self._frame, text="Password")
-        self._password_input = ttk.Entry(master=self._frame)
+        self._password_input = ttk.Entry(master=self._frame, show="*")
         password_label.grid(padx=100, pady=(5,2),sticky=constants.W)
         self._password_input.grid(padx=100, pady=0,sticky=constants.EW)
 

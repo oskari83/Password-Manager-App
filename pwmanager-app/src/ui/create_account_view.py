@@ -3,7 +3,21 @@ from tkinter.font import BOLD, Font
 from services.user_service import user_service
 
 class CreateAccountView:
+    """Luokka käyttäjätunnuksen luomiselle käyttöliittymässä.
+    """
+
     def __init__(self, root, handle_create_account, handle_show_login_view):
+        """Konstruktori, joka luo tarvittavat input-muuttujat (_username_input ja _password_input),
+        tallettaa tarvittavat event handlerit nappien painalluksiin (_handle_create_account ja
+        _handle_login_view), ja luo nappeihin ja teksteihin tarvittavat UI tyylit (_bold15 ja
+        _error_font).
+
+        Args:
+            root (ThemedTK): ThemedTk pääinstanssi joka on luotu main.py Main metodissa
+            handle_create_account (metodi): käyttäjätunnuksen luomisen napin painamisen event handleri
+            handle_show_login_view (metodi): takaisin sisäänkirjautumisnäkymään napin painamisen event handleri
+        """
+
         self._root = root
         self._handle_create_account = handle_create_account
         self._handle_show_login_view = handle_show_login_view
@@ -21,9 +35,13 @@ class CreateAccountView:
         self._initialize()
 
     def pack(self):
+        """Näyttää elementit käyttöliittymässä"""
+
         self._frame.pack(fill=constants.X)
 
     def destroy(self):
+        """Poistaa elementit käyttöliittymästä"""
+
         self._frame.destroy()
 
     def _show_error(self, message):
@@ -34,6 +52,11 @@ class CreateAccountView:
         self._error_label.grid_remove()
     
     def _create_account_handler(self):
+        """Tarkistaa että käyttäjä on antanut jotain merkkejä käyttäjätunnukseksi
+        ja salasanaksi ja välittää nämä sitten UserService:lle jotta käyttäjätunnus
+        voidaan luoda näiden perusteella.
+        """
+        
         username = self._username_input.get()
         password = self._password_input.get()
 
@@ -55,7 +78,7 @@ class CreateAccountView:
 
     def _initialize_password_field(self):
         password_label = ttk.Label(master=self._frame, text="Password")
-        self._password_input = ttk.Entry(master=self._frame)
+        self._password_input = ttk.Entry(master=self._frame, show="*")
         password_label.grid(padx=100, pady=(5,2),sticky=constants.W)
         self._password_input.grid(padx=100, pady=0,sticky=constants.EW)
 

@@ -47,3 +47,9 @@ class TestUserService(unittest.TestCase):
         self.service.add_password("testApp2", "superSafePassword2")
         pwlist = self.service.get_all_user_passwords()
         self.assertEqual(len(pwlist),2)
+
+    def test_returns_logged_in_user(self):
+        self.service.create_account("username5","password5")
+        self.service.authenticate("username5","password5")
+        user = self.service.get_current_user()
+        self.assertEqual(user.username,"username5")

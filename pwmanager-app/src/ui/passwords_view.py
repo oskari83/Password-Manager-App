@@ -4,6 +4,10 @@ from services.user_service import user_service
 import random, string
 
 class PasswordListView:
+    """Luokka joka listaa salasanat käyttäjän eri sovelluksiin ja
+    mahdollistaa poistamisen/kopioimisen
+    """
+
     def __init__(self, master_root, root, passwords, handle_delete_password):
         self._master_root = master_root
         self._root = root
@@ -14,12 +18,24 @@ class PasswordListView:
         self._initialize()
 
     def pack(self):
+        """Näyttää elementit käyttöliittymässä"""
+
         self._frame.pack(fill=constants.X)
 
     def destroy(self):
+        """Poistaa elementit käyttöliittymästä"""
+        
         self._frame.destroy()
 
     def _copy_to_clipboard_handler(self, text):
+        """Kopioi kyseiseen sovellukseen liittyvän salasanan käyttäjän tietokoneen
+        clip-boardiin eli käyttäjä voi paste:ttaa sen CTRL+V käyttäen sovelluksen 
+        ulkopuolella.
+
+        Args:
+            text (merkkijono): annettu salasana joka asetetaan clip-boardiin
+        """
+
         self._master_root.clipboard_clear()
         self._master_root.clipboard_append(text)
         self._master_root.update()
@@ -50,7 +66,20 @@ class PasswordListView:
             self._initialize_password_item(pw)
 
 class PasswordsView:
+    """Luokka joka on sovelluksen päänäkymä eli pitää sisällään uloskirjautumis napin,
+    listan käyttäjän salasanoista, ja alhaalla mahdollisuuden lisätä uusi salasana.
+    """
+
     def __init__(self, root, handle_logout):
+        """Konstruktori, joka luo tarvittavat input-muuttujat (_create_password_input_password 
+        ja _create_password_input_app), tallettaa UserService luokan referenssin muuttujaan,
+        ja luo nappeihin ja teksteihin tarvittavat UI tyylit (_bold10 ja _error_font).
+
+        Args:
+            root (ThemedTK): ThemedTk pääinstanssi joka on luotu main.py Main metodissa
+            handle_logout (metodi): käyttäjän uloskirjautumisen napin painamisen event handleri
+        """
+
         self._root = root
         self._handle_logout = handle_logout
         self._user = user_service.get_current_user()
@@ -58,6 +87,7 @@ class PasswordsView:
 
         self._create_password_input_password = None
         self._create_password_input_app = None
+
         self._password_list_frame = None
         self._password_list_view = None
 
@@ -70,9 +100,13 @@ class PasswordsView:
         self._initialize()
 
     def pack(self):
+        """Näyttää elementit käyttöliittymässä"""
+
         self._frame.pack(fill=constants.X)
 
     def destroy(self):
+        """Poistaa elementit käyttöliittymästä"""
+
         self._frame.destroy()
 
     def _show_error(self, message):
@@ -83,10 +117,21 @@ class PasswordsView:
         self._error_label.grid_remove()
 
     def _logout_handler(self):
+        """Kirjaa käyttäjän ulos sovelluksesta välittämällä pyynnön
+        UserService luokalle. 
+        """
+
         user_service.logout()
         self._handle_logout()
 
     def _handle_delete_password(self, password_app):
+        """Välittää sovelluksen nimen UserServicelle johon liittyvä
+        salasana halutaan poistaa.
+
+        Args:
+            password_app (merkkijono): sovellus jonka salasana halutaan poistaa
+        """
+
         user_service.delete_password(password_app)
         self._initialize_password_list()
 
@@ -106,6 +151,10 @@ class PasswordsView:
         self._password_list_view.pack()
 
     def _initialize_header(self):
+        """Luo tekstin joka kertoo kirjautuneen käyttäjän käyttäjänimen ja uloskirjautumiseen napin
+        päänäkymän yläreunaan.
+        """
+
         user_label = ttk.Label(master=self._frame, text=f"Logged in:    {self._user.username}", font=self._bold10)
         logout_button = ttk.Button(
             master=self._frame,
@@ -120,6 +169,11 @@ class PasswordsView:
         header_label.grid(row=1,column=0,padx=(100,5),pady=(15,5),sticky=constants.W)
     
     def _handle_create_password(self):
+        """Tarkistaa että käyttäjä on kirjoittanut jotain merkkejä salasanan sovelluksen
+        nimeksi ja itse salasanaksi ja välittää nämä merkkijonot sitten UserServicelle
+        jotta ne voidaan tallentaa sovellukseen.
+        """
+
         password_item_password = self._create_password_input_password.get()
         password_item_app = self._create_password_input_app.get()
 
@@ -135,11 +189,19 @@ class PasswordsView:
             self._create_password_input_app.delete(0,constants.END)
 
     def _handle_generate_password(self):
+        """Generoi satunnaisen 16-merkin salasanan isoista ja pienistä aakkosista ja numeroista,
+        ja näyttää tämän salasanan sitten käyttöliittymässä.
+        """
+
         generated_password = "".join(random.choice(string.ascii_lowercase+string.ascii_uppercase+string.digits) for _ in range(16))
         self._create_password_input_password.delete(0, constants.END)
         self._create_password_input_password.insert(0, generated_password)
 
     def _initialize_footer(self):
+        """Luo input-boksit sovelluksen nimelle, salasanalle ja napit salasanan
+        autogeneroimiseen ja tallentamiseen sovelluksen päänäkymän alareunaan.
+        """
+
         self._create_password_input_app = ttk.Entry(master=self._frame)
         self._create_password_input_password = ttk.Entry(master=self._frame)
 
