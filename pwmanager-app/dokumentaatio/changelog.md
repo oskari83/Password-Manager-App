@@ -46,3 +46,4 @@
 - Testi lisätty että UserService palauttaa sisäänkirjautuneen käyttäjän tiedot metodilla get_current_user
 - Arkkitehtuuri dokumentaation kirjoittaminen aloitettu
 - Docstring dokumentaatio lisätty 90% luokista ja metodeista
+- Käyttöohje kirjoitettu
