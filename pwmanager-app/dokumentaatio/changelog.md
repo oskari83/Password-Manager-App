@@ -44,3 +44,5 @@
 - PasswordListView luokkaan luotu metodi _copy_to_clipboard_handler joka kopioi halutun salasanan clipboardiin
 - Testi lisätty että salasanojen hakeminen tietyllä käyttäjällä palauttaa kaikki käyttäjän salasanat
 - Testi lisätty että UserService palauttaa sisäänkirjautuneen käyttäjän tiedot metodilla get_current_user
+- Arkkitehtuuri dokumentaation kirjoittaminen aloitettu
+- Docstring dokumentaatio lisätty 90% luokista ja metodeista

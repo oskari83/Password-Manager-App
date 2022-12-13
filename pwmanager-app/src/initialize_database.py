@@ -8,6 +8,7 @@ def drop_tables(connection):
     Args:
         connection (Connection): annettu tietokantayhteys
     """
+
     cursor = connection.cursor()
 
     cursor.execute('''
@@ -28,6 +29,7 @@ def create_tables(connection):
     Args:
         connection (Connection): annettu tietokantayhteys
     """
+
     cursor = connection.cursor()
 
     cursor.execute('''
@@ -50,9 +52,10 @@ def create_tables(connection):
 
 
 def initialize_database():
-    """Alustaa tietokannan ensin poistamalla kaiken tiedon tietokannasta, ja sitten luomalla tarvittavat
-    table:t siihen. 
+    """Alustaa tietokannan ensin poistamalla kaiken tiedon
+    tietokannasta, ja sitten luomalla tarvittavat table:t siihen.
     """
+
     connection = get_database_connection()
 
     drop_tables(connection)

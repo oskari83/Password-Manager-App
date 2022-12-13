@@ -13,4 +13,5 @@ def get_database_connection():
     Returns:
         Connection: palauttaa Connection instanssin tietokantayhteydestä
     """
+
     return connection

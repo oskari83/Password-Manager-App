@@ -15,23 +15,27 @@ def get_user_by_row(row):
 
 
 class UserRepository:
-    """Luokka, joka käsittelee SQLite tietokantaa ja mahdollistaa tiedon hakemisen ja lisäämisen sinne.
-    Tässä tapauksessa se hallitsee käyttäjien tallentamista, lukemista ja poistamista.
+    """Luokka, joka käsittelee SQLite tietokantaa ja mahdollistaa tiedon
+    hakemisen ja lisäämisen sinne. Tässä tapauksessa se hallitsee
+    käyttäjien tallentamista, lukemista ja poistamista.
     """
+
     def __init__(self, connection):
         """Konstruktori, joka laittaa annetun tietokantayhteyden muuttujaan
 
         Args:
             connection (Connection): Sqlite connection instanssi
         """
+
         self._connection = connection
 
     def find_all(self):
         """Hakee kaikki käyttäjätunnukset tietokannasta.
 
         Returns:
-            lista: palauttaa listan User luokan instansseja tietokannasta haetun datan perusteella. 
+            lista: palauttaa listan User luokan instansseja tietokannasta haetun datan perusteella.
         """
+
         cursor = self._connection.cursor()
         cursor.execute("SELECT * FROM users")
         rows = cursor.fetchall()
@@ -41,19 +45,21 @@ class UserRepository:
         """Poistaa kaikki käyttäjät tietokannasta (Vain tietokannan alustamiseen, ei sovelluksen
         käyttämiseen tarkoitettu).
         """
+
         cursor = self._connection.cursor()
         cursor.execute("DELETE FROM users")
         self._connection.commit()
 
     def insert_user(self, user):
         """Lisää (tallettaa) tietokantaan käyttäjätunnuksen eli sen tiedot.
- 
+
         Args:
             user (User): annettu User luokan instanssi jossa on tarvittava data
 
         Returns:
             User: Palauttaa tallennetun käyttäjän User luokan instanssin.
         """
+
         cursor = self._connection.cursor()
         sql = "INSERT INTO users (username,password) VALUES (?,?)"
         cursor.execute(sql, (user.username,user.password))
@@ -70,6 +76,7 @@ class UserRepository:
             User: Palauttaa User luokan instanssin jos käyttäjänimeen
             löytyy käyttäjä tietokannasta, muuten palauttaaa None.
         """
+
         cursor = self._connection.cursor()
         sql = "SELECT * FROM users WHERE username=?"
         cursor.execute(sql, (username,))

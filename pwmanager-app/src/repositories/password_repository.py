@@ -11,19 +11,23 @@ def get_password_by_row(row):
         Password: Palauttaa Password luokan instanssin tietokannasta haetun datan perusteella,
         paitsi jos dictionary data on annettu, muuten palauttaa None.
     """
+
     return Password(row["app"], row["password"], row["username"]) if row else None
 
 
 class PasswordRepository:
-    """Luokka, joka käsittelee SQLite tietokantaa ja mahdollistaa tiedon hakemisen ja lisäämisen sinne.
-    Tässä tapauksessa se hallitsee Salasanojen tallentamista, lukemista ja poistamista.
+    """Luokka, joka käsittelee SQLite tietokantaa ja mahdollistaa tiedon
+    hakemisen ja lisäämisen sinne. Tässä tapauksessa se hallitsee Salasanojen
+    tallentamista, lukemista ja poistamista.
     """
+
     def __init__(self, connection):
         """Konstruktori, joka laittaa annetun tietokantayhteyden muuttujaan
 
         Args:
             connection (Connection): Sqlite connection instanssi
         """
+
         self._connection = connection
 
     def find_all(self, username):
@@ -35,7 +39,7 @@ class PasswordRepository:
 
         Returns:
             lista: palauttaa listan Password luokan instansseja jotka kuuluvat annetulle
-            käyttäjänimelle. 
+            käyttäjänimelle.
         """
         cursor = self._connection.cursor()
         sql = "SELECT * FROM passwords WHERE username=?"
@@ -71,7 +75,7 @@ class PasswordRepository:
 
     def insert_password(self, password):
         """Lisää (tallettaa) tietokantaan salasanan.
- 
+
         Args:
             password (Password): annettu Password luokan instanssi jossa on tarvittava data
 
@@ -91,7 +95,7 @@ class PasswordRepository:
             password (Password): annetun salasanan Password luokan instanssi, joka halutaan poistaa
 
         Returns:
-            Password: palauttaa poistetun salasanan Password luokan instanssin. 
+            Password: palauttaa poistetun salasanan Password luokan instanssin.
         """
         cursor = self._connection.cursor()
         sql = "DELETE FROM passwords WHERE username=? AND app=?"

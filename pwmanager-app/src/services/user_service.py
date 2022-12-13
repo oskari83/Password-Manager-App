@@ -18,6 +18,7 @@ class UserService:
         """Luokan konstruktori joka asettaa käyttäjä sekä salasana repositoriot sekä
         ylläpitää kirjautunutta käyttäjää muuttujissa.
         """
+
         self._user_repo = default_user_repository
         self._password_repo = default_password_repository
         self._logged_in = False
@@ -34,6 +35,7 @@ class UserService:
             User: jos käyttäjänimi ei ole varattu, palauttaa User luokan instanssin
             luodusta käyttäjästä, muuten palauttaa None.
         """
+
         username_not_available = self._user_repo.find_user(username_input)
         if username_not_available:
             return None
@@ -42,7 +44,7 @@ class UserService:
         return user
 
     def authenticate(self, username, password_input):
-        """Kirjaa käyttän sisään omalle tunnukselleen (tarkistaa että salasana ja 
+        """Kirjaa käyttän sisään omalle tunnukselleen (tarkistaa että salasana ja
         käyttäjätunnus pari ovat oikein).
 
         Args:
@@ -53,6 +55,7 @@ class UserService:
             User: palauttaa User luokan instanssin kirjautuneesta käyttäjätilistä,
             paitsi jos tunnukset eivät ole oikein, jolloin palauttaa None.
         """
+
         user_account = self._user_repo.find_user(username)
         if not user_account or user_account.password!=password_input:
             return None
@@ -62,6 +65,7 @@ class UserService:
     def logout(self):
         """Kirjaa käyttäjän ulos sovelluksesta.
         """
+
         self._current_user = None
 
     def add_password(self, app_input,password_input):
@@ -75,6 +79,7 @@ class UserService:
             Password: palauttaa Password luokan instanssin luodusta salasanasta, paitsi
             jos sovellukseen ei ole kirjautunut kukaan käyttäjä, jolloin palauttaa None.
         """
+
         if not self._current_user:
             return None
         new_pass = Password(app_input,password_input,self._current_user.username)
@@ -85,12 +90,14 @@ class UserService:
         """Poistaa käyttäjän valitseman salasanan
 
         Args:
-            app_input (merkkijono): annettu sovelluksen nimi johon liittyvä salasana halutaan poistaa
+            app_input (merkkijono): annettu sovelluksen nimi johon liittyvä
+            salasana halutaan poistaa
 
         Returns:
-            merkkijono: Palauttaa statuksen siitä, että onnistuiko merkkijonon poistaminen, riippuen 
+            merkkijono: Palauttaa statuksen siitä, että onnistuiko merkkijonon poistaminen, riippuen
             siitä, että löytyikö annetulla sovelluksen nimellä salasanaa.
         """
+
         if not self._current_user:
             return None
         password_item = self._password_repo.find_password(app_input, self._current_user.username)
@@ -105,6 +112,7 @@ class UserService:
         Returns:
             lista: palauttaa listan Password luokan instansseja
         """
+
         password_list = self._password_repo.find_all(self._current_user.username)
         return password_list
 
@@ -114,6 +122,7 @@ class UserService:
         Returns:
             User: palauttaa User luokan instanssin kirjautuneesta käyttäjästä
         """
+
         return self._current_user
 
 user_service = UserService()
