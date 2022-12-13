@@ -39,7 +39,7 @@ Sovellus tallentaa kaiken datan pysyvästi Sqlite tietokantaan. Tietokantaa käs
 
 ### Sisäänkirjautuminen
 
-Käyttäjä voi kirjautua sisään sovellukseen kirjoittamalla merkkijonoja käyttäjänimeksi ja salasanaksi. Tämän jälkeen jos käyttäjä painaa nappia, kutsuu `UI` luokan hallitsema `LoginView` luokkaa annetuilla merkkijonoilla `UserService` luokan `authenticate(username,password_input)` metodia, joka taas kutsuu `UserRepository` luokkaa metodilla `find_user(username_input)` hakeakseen käyttäjänimeen liitetyn salasanan tietokannasta. `UserService` sitten vertaa näitä salasanoja keskenään, ja jos nämä ovat samat, tallettaa käyttäjän muuttujaan ja palauttaa `User` luokan instanssin käyttöliittymälle indikoiden että sisäänkirjautuminen onnistui. Tämän jälkeen `UI` luokka tietää vaihtaa näkymää `PasswordsView` luokan määritellemäksi eli päänäkymäksi.
+Käyttäjä voi kirjautua sisään sovellukseen kirjoittamalla merkkijonoja käyttäjänimeksi ja salasanaksi. Tämän jälkeen jos käyttäjä painaa nappia, kutsuu `UI` luokan hallitsema `LoginView` luokkaa annetuilla merkkijonoilla `UserService` luokan `authenticate(username,password_input)` metodia, joka taas kutsuu `UserRepository` luokkaa metodilla `find_user(username_input)` hakeakseen käyttäjänimeen liitetyn salasanan tietokannasta. `UserService` sitten vertaa näitä salasanoja keskenään, ja jos nämä ovat samat, tallettaa käyttäjän muuttujaan ja palauttaa `User` luokan instanssin käyttöliittymälle indikoiden että sisäänkirjautuminen onnistui. Tämän jälkeen `UI` luokka tietää vaihtaa näkymää `PasswordsView` luokan määrittelemäksi eli päänäkymäksi.
 
 Seuraava sekvenssidiagrammi havannoi toimintaa:
 
