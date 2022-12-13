@@ -16,7 +16,7 @@ Toinen näkymä (`CreateAccountView`) on sisäänkirjautumisnäkymään liittyv�
 
 Kolmas päänäkymä (`PasswordsView`) on sovelluksen päänäkymä sillä sisäänkirjauduttuaan, käyttäjä näkee tässä näkymässä kaikki hänen tallentamat sovellusten salasanat listana. Näkymän ylälaidassa hän näkee myös oman käyttäjänimensä ja uloskirjautumisnapin. Alalaidassa hän voi antaa uuden sovelluksen nimen ja salasanan joka tallenetaan sovellukseen ja siihe liittyvän napin. 
 
-Jokainen näkymä on oma luokkansa, joita hallitsee ylä-luokka `UI`, eli jonka vastuulla on näiden kolmen näkymän välillä vaihtaminen. Kaikki käyttöliittymän toiminnallisuus on eriytetty siten, että se kutsuu vain UserService luokan metodeja. 
+Jokainen näkymä on oma luokkansa, joita hallitsee ylä-luokka `UI`, eli jonka vastuulla on näiden kolmen näkymän välillä vaihtaminen. Kaikki käyttöliittymän toiminnallisuus on eriytetty siten, että se kutsuu vain `UserService` luokan metodeja. 
 
 ## Sovelluslogiikka
 
@@ -39,14 +39,14 @@ Sovellus tallentaa kaiken datan pysyvästi Sqlite tietokantaan. Tietokantaa käs
 
 ### Sisäänkirjautuminen
 
-Käyttäjä voi kirjautua sisään sovellukseen kirjoittamalla merkkijonoja käyttäjänimeksi ja salasanaksi. Tämän jälkeen jos käyttäjä painaa nappia, kutsuu UI luokan hallitsema LoginView luokka annetuilla merkkijonoilla UserService luokan authenticate metodia, joka taas kutsuu UserRepository luokkaa hakeakseen käyttäjänimeen liitetyn salasanan tietokannasta. UserService sitten vertaa näitä salasanoja keskenään, ja jos nämä ovat samat, tallettaa käyttäjän muuttujaan ja palauttaa User luokan instanssin käyttöliittymälle indikoiden että sisäänkirjautuminen onnistui. Tämän jälkeen UI luokka tietää vaihtaa näkymää PasswordsView luokan määritellemäksi eli päänäkymäksi. 
+Käyttäjä voi kirjautua sisään sovellukseen kirjoittamalla merkkijonoja käyttäjänimeksi ja salasanaksi. Tämän jälkeen jos käyttäjä painaa nappia, kutsuu `UI` luokan hallitsema `LoginView` luokkaa annetuilla merkkijonoilla `UserService` luokan `authenticate(username,password_input)` metodia, joka taas kutsuu `UserRepository` luokkaa metodilla `find_user(username_input)` hakeakseen käyttäjänimeen liitetyn salasanan tietokannasta. `UserService` sitten vertaa näitä salasanoja keskenään, ja jos nämä ovat samat, tallettaa käyttäjän muuttujaan ja palauttaa `User` luokan instanssin käyttöliittymälle indikoiden että sisäänkirjautuminen onnistui. Tämän jälkeen `UI` luokka tietää vaihtaa näkymää `PasswordsView` luokan määritellemäksi eli päänäkymäksi. 
 
 ![alt text](https://github.com/oskari83/ot-harjoitustyo/blob/master/pwmanager-app/pictures/login_sequence.png?raw=true)
 
 ### Salasanan lisääminen
 
-Käyttäjä voi lisätä salasanan sovellukseen antamalla sovelluksen nimen ja salasanan merkkijonoina ja sitten painamalla Add-nappia käyttöliittymässä. Mahdollisesti käyttäjä voi myös autogeneroida salasanan painamalla ensin Generate-nappia. Tämän jälkeen kutsuu UI luokan hallitsema PasswordsView luokka UserService luokkaa joka taas paketoi tiedon Password instanssiin ja lähettää datan eteenpäin PasswordRepository luokalle joka vihdoin tallettaa salasanan tietokantaan. Tämän onnistumisesta indikoi sekä PasswordRepository ja UserService palauttamalla Password luokan instanssin takaisinpäin. 
+Käyttäjä voi lisätä salasanan sovellukseen antamalla sovelluksen nimen ja salasanan merkkijonoina ja sitten painamalla Add-nappia käyttöliittymässä. Mahdollisesti käyttäjä voi myös autogeneroida salasanan painamalla ensin Generate-nappia. Tämän jälkeen kutsuu `UI` luokan hallitsema `PasswordsView` luokka `UserService` luokkaa metodilla `add_password(app_input, password_input)`, joka taas paketoi tiedon `Password` luokan instanssiin ja lähettää datan eteenpäin `PasswordRepository` luokalle metodilla `inser_password(password)`, joka vihdoin tallettaa salasanan tietokantaan. Tämän onnistumisesta indikoi sekä `PasswordRepository` ja `UserService` palauttamalla `Password` luokan instanssin takaisinpäin. 
 
 ### Uloskirjautuminen
 
-Käyttäjä voi kirjautua ulos painamalla Logout-nappia päänäkymässä, jonka jälkeen UI-luokan hallitsema PasswordsView luokka kutsuu UserService luokan logout funktiota joka kirjaa käyttäjän ulos poistamalla käyttäjän tämänhetkisen käyttäjän muuttujasta. Tämän jälkeen UI-luokka automaattisesti vaihtaa näkymää sisäänkirjautumisnäkymään. 
+Käyttäjä voi kirjautua ulos painamalla Logout-nappia päänäkymässä, jonka jälkeen UI-luokan hallitsema `PasswordsView` luokka kutsuu `UserService` luokan `logout()` funktiota joka kirjaa käyttäjän ulos poistamalla käyttäjän tämänhetkisen käyttäjän muuttujasta. Tämän jälkeen `UI` luokka automaattisesti vaihtaa näkymää sisäänkirjautumisnäkymään. 
