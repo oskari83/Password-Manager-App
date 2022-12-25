@@ -1,12 +1,9 @@
 from entities.user import User
-from entities.password import Password
+from services.password_service import password_service
+from services.encryption_service import encryption_service
 
 from repositories.user_repository import (
     user_repository as default_user_repository
-)
-
-from repositories.password_repository import (
-    password_repository as default_password_repository
 )
 
 class UserService:
@@ -20,7 +17,6 @@ class UserService:
         """
 
         self._user_repo = default_user_repository
-        self._password_repo = default_password_repository
         self._logged_in = False
         self._current_user = None
 
@@ -39,7 +35,9 @@ class UserService:
         username_not_available = self._user_repo.find_user(username_input)
         if username_not_available:
             return None
-        new_user = User(username_input,password_input)
+
+        encrypted_user_password = encryption_service.encrypt_password(password_input)
+        new_user = User(username_input, encrypted_user_password)
         user = self._user_repo.insert_user(new_user)
         return user
 
@@ -57,64 +55,17 @@ class UserService:
         """
 
         user_account = self._user_repo.find_user(username)
-        if not user_account or user_account.password!=password_input:
+        if not user_account or encryption_service.password_match_comparison(password_input,user_account.password) == False:
             return None
         self._current_user = user_account
+        password_service.set_user(user_account)
         return user_account
 
     def logout(self):
         """Kirjaa käyttäjän ulos sovelluksesta.
         """
-
+        password_service.remove_user()
         self._current_user = None
-
-    def add_password(self, app_input,password_input):
-        """Lisää salasanan sovellukseen sillä hetkellä kirjautuneelle käyttäjälle.
-
-        Args:
-            app_input (merkkijono): annettu sovelluksen nimi
-            password_input (merkkijono): annetun sovellukseen liittyvä salasana
-
-        Returns:
-            Password: palauttaa Password luokan instanssin luodusta salasanasta, paitsi
-            jos sovellukseen ei ole kirjautunut kukaan käyttäjä, jolloin palauttaa None.
-        """
-
-        if not self._current_user:
-            return None
-        new_pass = Password(app_input,password_input,self._current_user.username)
-        self._password_repo.insert_password(new_pass)
-        return new_pass
-
-    def delete_password(self, app_input):
-        """Poistaa käyttäjän valitseman salasanan
-
-        Args:
-            app_input (merkkijono): annettu sovelluksen nimi johon liittyvä
-            salasana halutaan poistaa
-
-        Returns:
-            merkkijono: Palauttaa statuksen siitä, että onnistuiko merkkijonon poistaminen, riippuen
-            siitä, että löytyikö annetulla sovelluksen nimellä salasanaa.
-        """
-
-        if not self._current_user:
-            return None
-        password_item = self._password_repo.find_password(app_input, self._current_user.username)
-        if not password_item:
-            return "Could not find such password item"
-        self._password_repo.delete_password(password_item)
-        return "Password entry deleted successfully"
-
-    def get_all_user_passwords(self):
-        """Hakee kaikki käyttäjän salasanat.
-
-        Returns:
-            lista: palauttaa listan Password luokan instansseja
-        """
-
-        password_list = self._password_repo.find_all(self._current_user.username)
-        return password_list
 
     def get_current_user(self):
         """Hakee tällähetkellä sovellukseen kirjautuneen käyttäjän tiedot.
@@ -124,5 +75,8 @@ class UserService:
         """
 
         return self._current_user
+
+    def get_logged_in_status(self):
+        return self._logged_in
 
 user_service = UserService()

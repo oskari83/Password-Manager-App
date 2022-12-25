@@ -47,3 +47,7 @@
 - Arkkitehtuuri dokumentaation kirjoittaminen aloitettu
 - Docstring dokumentaatio lisätty 90% luokista ja metodeista
 - Käyttöohje kirjoitettu
+
+## Loppupalautus
+
+- 

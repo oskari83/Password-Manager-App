@@ -71,6 +71,8 @@ class PasswordRepository:
         sql = "SELECT * FROM passwords WHERE username=? AND app=?"
         cursor.execute(sql, (username,app_name))
         rows = cursor.fetchall()
+        if len(rows) == 0:
+            return None
         return get_password_by_row(rows[0])
 
     def insert_password(self, password):
@@ -100,6 +102,13 @@ class PasswordRepository:
         cursor = self._connection.cursor()
         sql = "DELETE FROM passwords WHERE username=? AND app=?"
         cursor.execute(sql, (password.username, password.app))
+        self._connection.commit()
+        return password
+
+    def update_password(self, password):
+        cursor = self._connection.cursor()
+        sql = "UPDATE passwords SET password = ? WHERE username=? AND app=?"
+        cursor.execute(sql, (password.password, password.username, password.app))
         self._connection.commit()
         return password
 

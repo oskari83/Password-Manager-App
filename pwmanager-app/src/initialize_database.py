@@ -1,6 +1,5 @@
 from database_connection import get_database_connection
 
-
 def drop_tables(connection):
     """Poistaa tietokannasta users table:n ja passwords table:n jos
     ne ovat olemassa, eli toisinsanoen poistaa tietokannasta kaiken tiedon.
@@ -20,7 +19,6 @@ def drop_tables(connection):
     ''')
 
     connection.commit()
-
 
 def create_tables(connection):
     """Luo tietokantaan tarvittavat table:t eli users ja passwords table:t
@@ -50,7 +48,6 @@ def create_tables(connection):
 
     connection.commit()
 
-
 def initialize_database():
     """Alustaa tietokannan ensin poistamalla kaiken tiedon
     tietokannasta, ja sitten luomalla tarvittavat table:t siihen.
@@ -60,7 +57,6 @@ def initialize_database():
 
     drop_tables(connection)
     create_tables(connection)
-
 
 if __name__ == "__main__":
     initialize_database()

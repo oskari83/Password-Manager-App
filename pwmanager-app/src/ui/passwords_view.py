@@ -1,6 +1,8 @@
 from tkinter import ttk, constants, StringVar
 from tkinter.font import BOLD, Font
 from services.user_service import user_service
+from services.password_service import password_service
+from entities.password import Password
 import random, string
 
 class PasswordListView:
@@ -8,12 +10,16 @@ class PasswordListView:
     mahdollistaa poistamisen/kopioimisen
     """
 
-    def __init__(self, master_root, root, passwords, handle_delete_password):
+    def __init__(self, master_root, root, passwords, handle_delete_password, handle_edit_password, handle_cancel_edit_password, handle_update_password, app_modes):
         self._master_root = master_root
         self._root = root
         self._passwords = passwords
         self._handle_delete_password = handle_delete_password
+        self._handle_edit_password = handle_edit_password
+        self._handle_cancel_edit_password = handle_cancel_edit_password
+        self._handle_update_password = handle_update_password
         self._frame = None
+        self._app_modes = app_modes
 
         self._initialize()
 
@@ -40,18 +46,37 @@ class PasswordListView:
         self._master_root.clipboard_append(text)
         self._master_root.update()
 
-    def _initialize_password_item(self, password):
+    def _initialize_password_item(self, password, mode):
         item_frame = ttk.Frame(master=self._frame)
         labelApp = ttk.Label(master=item_frame,text=f"{password.app}:")
-        labelPassword = ttk.Label(master=item_frame,text=password.password)
 
-        copy_to_clipboard_button = ttk.Button(master=item_frame,text="Copy",command=lambda: self._copy_to_clipboard_handler(password.password))
-        delete_password_button = ttk.Button(master=item_frame,text="Delete",command=lambda: self._handle_delete_password(password.app))
-        
+        if mode==0:
+            labelPassword = ttk.Label(master=item_frame,text=password.password)
+
+            copy_to_clipboard_button = ttk.Button(master=item_frame,text="Copy",command=lambda: self._copy_to_clipboard_handler(password.password))
+            edit_password_button = ttk.Button(master=item_frame,text="Edit",command=lambda: self._handle_edit_password(password.app))
+
+            copy_to_clipboard_button.grid(row=0,column=2,padx=(5,5),pady=5,sticky=constants.EW)
+            edit_password_button.grid(row=0,column=3,padx=(5,100),pady=5,sticky=constants.EW)
+
+            labelPassword.grid(row=0,column=1,padx=(5,5),pady=5,sticky=constants.EW)
+        else:
+            edit_password_input = ttk.Entry(master=item_frame)
+
+            delete_password_button = ttk.Button(master=item_frame,text="Delete",command=lambda: self._handle_delete_password(password.app))
+            save_edit_button = ttk.Button(master=item_frame,text="Save",command=lambda: self._handle_update_password(Password(password.app,edit_password_input.get(),password.username)))
+            cancel_edit_button = ttk.Button(master=item_frame,text="Cancel",command=lambda: self._handle_cancel_edit_password(password.app))
+            
+            delete_password_button.grid(row=0,column=2,padx=(5,5),pady=5,sticky=constants.EW)
+            save_edit_button.grid(row=0,column=3,padx=(5,5),pady=5,sticky=constants.EW)
+            cancel_edit_button.grid(row=0,column=4,padx=(5,100),pady=5,sticky=constants.EW)
+
+            edit_password_input.grid(row=0,column=1,padx=(5,5),pady=5,sticky=constants.EW)
+
+            edit_password_input.delete(0, constants.END)
+            edit_password_input.insert(0, password.password)
+
         labelApp.grid(row=0,column=0,padx=(100,5),pady=5,sticky=constants.EW)
-        labelPassword.grid(row=0,column=1,padx=(5,5),pady=5,sticky=constants.EW)
-        copy_to_clipboard_button.grid(row=0,column=2,padx=(5,5),pady=5,sticky=constants.EW)
-        delete_password_button.grid(row=0,column=3,padx=(5,100),pady=5,sticky=constants.EW)
 
         item_frame.grid_columnconfigure(0,weight=0,minsize=100)
         item_frame.grid_columnconfigure(1,weight=1,minsize=200)
@@ -63,7 +88,7 @@ class PasswordListView:
         self._frame = ttk.Frame(master=self._root)
         
         for pw in self._passwords:
-            self._initialize_password_item(pw)
+            self._initialize_password_item(pw, self._app_modes[pw.app])
 
 class PasswordsView:
     """Luokka joka on sovelluksen päänäkymä eli pitää sisällään uloskirjautumis napin,
@@ -84,6 +109,8 @@ class PasswordsView:
         self._handle_logout = handle_logout
         self._user = user_service.get_current_user()
         self._frame = None
+        # mode=0 tarkoittaa että olemme normaalinäkymässä, mode=1 tarkoittaa että olemme edit-näkymässä
+        self._app_edit_mode = {}
 
         self._create_password_input_password = None
         self._create_password_input_app = None
@@ -124,6 +151,19 @@ class PasswordsView:
         user_service.logout()
         self._handle_logout()
 
+    def _handle_edit_password(self, password_app):
+        self._app_edit_mode[password_app] = 1
+        self._initialize_password_list()
+
+    def _handle_cancel_edit_password(self, password_app):
+        self._app_edit_mode[password_app] = 0
+        self._initialize_password_list()
+
+    def _handle_update_password(self, password):
+        self._app_edit_mode[password.app] = 0
+        password_service.change_password(password)
+        self._initialize_password_list()
+
     def _handle_delete_password(self, password_app):
         """Välittää sovelluksen nimen UserServicelle johon liittyvä
         salasana halutaan poistaa.
@@ -132,20 +172,26 @@ class PasswordsView:
             password_app (merkkijono): sovellus jonka salasana halutaan poistaa
         """
 
-        user_service.delete_password(password_app)
+        password_service.delete_password(password_app)
         self._initialize_password_list()
 
     def _initialize_password_list(self):
         if self._password_list_view:
             self._password_list_view.destroy()
 
-        passwords = user_service.get_all_user_passwords()
+        passwords = password_service.get_all_user_passwords()
+        for password in passwords:
+            self._app_edit_mode[password.app] = self._app_edit_mode.get(password.app, 0)
 
         self._password_list_view = PasswordListView(
             self._root,
             self._password_list_frame,
             passwords,
-            self._handle_delete_password
+            self._handle_delete_password,
+            self._handle_edit_password,
+            self._handle_cancel_edit_password,
+            self._handle_update_password,
+            self._app_edit_mode
         )
 
         self._password_list_view.pack()
@@ -182,11 +228,14 @@ class PasswordsView:
             return
 
         if password_item_password and password_item_app:
-            user_service.add_password(password_item_app,password_item_password)
-            self._hide_error()
-            self._initialize_password_list()
-            self._create_password_input_password.delete(0,constants.END)
-            self._create_password_input_app.delete(0,constants.END)
+            response = password_service.add_password(password_item_app,password_item_password)
+            if isinstance(response, str):
+                self._show_error(response)
+            else:
+                self._hide_error()
+                self._initialize_password_list()
+                self._create_password_input_password.delete(0,constants.END)
+                self._create_password_input_app.delete(0,constants.END)
 
     def _handle_generate_password(self):
         """Generoi satunnaisen 16-merkin salasanan isoista ja pienistä aakkosista ja numeroista,

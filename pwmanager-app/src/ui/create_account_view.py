@@ -66,6 +66,7 @@ class CreateAccountView:
         
         response = user_service.create_account(username,password)
         if response is not None:
+            user_service.authenticate(username,password)
             self._handle_create_account()
         else:
             self._show_error("Username is already taken")
