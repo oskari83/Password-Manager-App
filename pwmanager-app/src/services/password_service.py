@@ -2,7 +2,8 @@ from entities.user import User
 from entities.password import Password
 
 from repositories.password_repository import (
-    password_repository as default_password_repository
+    password_repository as default_password_repository,
+    test_password_repository as test_repository
 )
 
 class PasswordService:
@@ -10,12 +11,19 @@ class PasswordService:
     sekä yksittäisten salasanojen lisäämisen ja poiston.
     """
 
-    def __init__(self):
+    def __init__(self, repository_mode=0):
         """Luokan konstruktori joka asettaa käyttäjä sekä salasana repositoriot sekä
-        ylläpitää kirjautunutta käyttäjää muuttujissa.
+        ylläpitää kirjautunutta käyttäjää muuttujissa. Repository mode defaulttaa 0 normaali
+        käytössä, testeissä kuitenkin asetetaan 1 jotta testit käyttävät oikeaa tietokantaa.
         """
 
-        self._password_repo = default_password_repository
+        self._password_repo = None
+
+        if repository_mode==0:
+            self._password_repo = default_password_repository
+        else:
+            self._password_repo = test_repository
+
         self._logged_in = False
         self._current_user = None
 

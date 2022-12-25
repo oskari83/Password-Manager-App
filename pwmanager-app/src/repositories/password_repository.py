@@ -1,4 +1,4 @@
-from database_connection import get_database_connection
+from database_connection import get_database_connection, get_test_database_connection
 from entities.password import Password
 
 def get_password_by_row(row):
@@ -113,3 +113,4 @@ class PasswordRepository:
         return password
 
 password_repository = PasswordRepository(get_database_connection())
+test_password_repository = PasswordRepository(get_test_database_connection())

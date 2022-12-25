@@ -1,4 +1,4 @@
-from database_connection import get_database_connection
+from database_connection import get_database_connection, get_test_database_connection
 
 def drop_tables(connection):
     """Poistaa tietokannasta users table:n ja passwords table:n jos
@@ -51,12 +51,17 @@ def create_tables(connection):
 def initialize_database():
     """Alustaa tietokannan ensin poistamalla kaiken tiedon
     tietokannasta, ja sitten luomalla tarvittavat table:t siihen.
+    Alustaa samalla myös testeille tarkoitetun tietokannan.
     """
 
     connection = get_database_connection()
+    test_connection = get_test_database_connection()
 
     drop_tables(connection)
     create_tables(connection)
+
+    drop_tables(test_connection)
+    create_tables(test_connection)
 
 if __name__ == "__main__":
     initialize_database()

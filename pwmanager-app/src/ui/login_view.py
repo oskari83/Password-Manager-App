@@ -41,8 +41,13 @@ class LoginView:
         username = self._username_input.get()
         password = self._password_input.get()
 
+        if len(username) == 0 or len(password) == 0:
+            self._show_error("Please input a username and password")
+            return
+
         response = user_service.authenticate(username,password)
         if response is not None:
+            self._hide_error()
             self._login_handler()
         else:
             self._show_error("Username or password incorrect")

@@ -1,4 +1,4 @@
-from database_connection import get_database_connection
+from database_connection import get_database_connection, get_test_database_connection
 from entities.user import User
 
 def get_user_by_row(row):
@@ -86,4 +86,4 @@ class UserRepository:
         return None
 
 user_repository = UserRepository(get_database_connection())
-    
+test_user_repository = UserRepository(get_test_database_connection())

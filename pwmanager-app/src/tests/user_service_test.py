@@ -3,9 +3,8 @@ from services.user_service import UserService
 
 class TestUserService(unittest.TestCase):
     def setUp(self):
-        self.service = UserService()
+        self.service = UserService(1)
         self.service._user_repo.delete_all()
-        self.service._password_repo.delete_all()
 
     def test_account_creation(self):
         response = self.service.create_account("username2","password2")
@@ -27,29 +26,17 @@ class TestUserService(unittest.TestCase):
         response = self.service.authenticate("username2","vaarasalasana")
         self.assertEqual(response, None)
 
-    def test_password_addition_works(self):
-        self.service.create_account("username5","password5")
-        self.service.authenticate("username5","password5")
-        response = self.service.add_password("testApp", "superSafePassword")
-        self.assertEqual(response.app,"testApp")
-
-    def test_password_removal_works(self):
-        self.service.create_account("username5","password5")
-        self.service.authenticate("username5","password5")
-        self.service.add_password("testApp", "superSafePassword")
-        response = self.service.delete_password("testApp")
-        self.assertEqual(response,"Password entry deleted successfully")
-
-    def test_password_list_return_works(self):
-        self.service.create_account("username5","password5")
-        self.service.authenticate("username5","password5")
-        self.service.add_password("testApp", "superSafePassword")
-        self.service.add_password("testApp2", "superSafePassword2")
-        pwlist = self.service.get_all_user_passwords()
-        self.assertEqual(len(pwlist),2)
-
     def test_returns_logged_in_user(self):
         self.service.create_account("username5","password5")
         self.service.authenticate("username5","password5")
         user = self.service.get_current_user()
         self.assertEqual(user.username,"username5")
+
+    def test_logout_works(self):
+        self.service.create_account("username5","password5")
+        self.service.authenticate("username5","password5")
+        user = self.service.get_current_user()
+        self.assertEqual(user.username,"username5")
+        self.service.logout()
+        response = self.service.get_current_user()
+        self.assertEqual(response, None)

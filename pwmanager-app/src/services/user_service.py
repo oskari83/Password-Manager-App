@@ -3,7 +3,8 @@ from services.password_service import password_service
 from services.encryption_service import encryption_service
 
 from repositories.user_repository import (
-    user_repository as default_user_repository
+    user_repository as default_user_repository,
+    test_user_repository as test_repository
 )
 
 class UserService:
@@ -11,13 +12,18 @@ class UserService:
     sekä yksittäisten salasanojen lisäämisen ja poiston.
     """
 
-    def __init__(self):
+    def __init__(self, repository_mode=0):
         """Luokan konstruktori joka asettaa käyttäjä sekä salasana repositoriot sekä
-        ylläpitää kirjautunutta käyttäjää muuttujissa.
+        ylläpitää kirjautunutta käyttäjää muuttujissa. Repository mode defaulttaa 0 normaali
+        käytössä, testeissä kuitenkin asetetaan 1 jotta testit käyttävät oikeaa tietokantaa.
         """
+        self._user_repo = None
 
-        self._user_repo = default_user_repository
-        self._logged_in = False
+        if repository_mode==0:
+            self._user_repo = default_user_repository
+        else:
+            self._user_repo = test_repository
+
         self._current_user = None
 
     def create_account(self,username_input, password_input):
@@ -75,8 +81,5 @@ class UserService:
         """
 
         return self._current_user
-
-    def get_logged_in_status(self):
-        return self._logged_in
 
 user_service = UserService()

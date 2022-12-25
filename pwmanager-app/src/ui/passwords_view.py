@@ -160,6 +160,10 @@ class PasswordsView:
         self._initialize_password_list()
 
     def _handle_update_password(self, password):
+        if len(password.password) == 0:
+            self._show_error(f"Error, cannot update password. Empty password for App: {password.app} .")
+            return
+        self._hide_error()
         self._app_edit_mode[password.app] = 0
         password_service.change_password(password)
         self._initialize_password_list()
