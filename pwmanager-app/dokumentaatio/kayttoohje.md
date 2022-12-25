@@ -56,13 +56,13 @@ Voit myös mahdollisesti autogeneroida uuden salasanan painamalla "Generate"-nap
 
 Voit kopioida johonkin sovellukseen liittyvän salasanan clip-boardiin painamalla copy-nappia joka näkyy kuvassa Edit-napin vasemmalla puolella.
 
-![alt text](https://github.com/oskari83/ot-harjoitustyo/blob/master/pwmanager-app/pictures/kuva1.png?raw=true)
+![alt text](https://github.com/oskari83/ot-harjoitustyo/blob/master/pwmanager-app/pictures/kuva3.png?raw=true)
 
 ## Salasanan poistaminen
 
 Voit poistaa salasanan painamalla ensin Edit-nappia kuten näkyy:
 
-![alt text](https://github.com/oskari83/ot-harjoitustyo/blob/master/pwmanager-app/pictures/kuva1.png?raw=true)
+![alt text](https://github.com/oskari83/ot-harjoitustyo/blob/master/pwmanager-app/pictures/kuva3.png?raw=true)
 
 Jonka jälkeen Delete-nappia painamalla salasana poistuu lopullisesti (ole siis varovainen).
 
@@ -72,7 +72,7 @@ Jonka jälkeen Delete-nappia painamalla salasana poistuu lopullisesti (ole siis 
 
 Voit muutta sovellukseen liittyvää salasanaa painamalla ensin Edit-nappia kuten näkyy:
 
-![alt text](https://github.com/oskari83/ot-harjoitustyo/blob/master/pwmanager-app/pictures/kuva1.png?raw=true)
+![alt text](https://github.com/oskari83/ot-harjoitustyo/blob/master/pwmanager-app/pictures/kuva3.png?raw=true)
 
 Jonka jälkeen tekstikenttään voit kirjoittaa uuden salasanan ja Save-nappia painamalla tallentuu uusi salasana tietokantaan. Voit myös perua salasanan muuttamisen painamalla Cancel-nappia sen oikealla puolella.
 
