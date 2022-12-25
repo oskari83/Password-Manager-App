@@ -38,9 +38,9 @@ Tämän jälkeen sovellus näyttää seuraavalta:
 
 ![alt text](https://github.com/oskari83/ot-harjoitustyo/blob/master/pwmanager-app/pictures/ohje2.png?raw=true)
 
-Tämän jälkeen täytyy kirjoittaa käyttäjänimi ja salasana ja painaa "Create Account"-nappia. Jos sovellus sanoo käyttäjänimen olevan jo varattuna, muuta käyttäjänimeäsi kirjoittamalla jokin muu käyttäjänimi ja painamalla "Create Account"-nappia uudelleen.
+Tämän jälkeen täytyy kirjoittaa käyttäjänimi ja salasana ja painaa "Create Account"-nappia. Jos sovellus sanoo käyttäjänimen olevan jo varattuna, muuta käyttäjänimeäsi kirjoittamalla jokin muu käyttäjänimi ja painamalla "Create Account"-nappia uudelleen. Tämän jälkeen sovellus luo uuden käyttäjätunnuksen ja kirjaa sinut automaattisesti sisään.
 
-Tämän jälkeen sovellus vie takaisin sisäänkirjautumisnäkymään, johon voit uudelleen kirjoittaa äsken luomasi tunnuksesi ja painamalla "Login"-nappia, kuten näkyy:
+Jos sinulla on jo käyttäjätunnus luotuna, voit suoraan kirjautua sisään kuten kuvasta näkyy.
 
 ![alt text](https://github.com/oskari83/ot-harjoitustyo/blob/master/pwmanager-app/pictures/ohje3.png?raw=true)
 
@@ -52,11 +52,31 @@ Voit tallettaa salasanan sovellukseen kirjoittamalla siihen liittyvän sovelluks
 
 Voit myös mahdollisesti autogeneroida uuden salasanan painamalla "Generate"-nappia.
 
-## Salasanan poistaminen/kopioiminen
+## Salasanan kopioiminen
 
-Voit poistaa tai kopioida salasanan clip-boardiisi painamalla joko "Delete" tai "Copy"-nappia salasanan oikealla puolella kuten näkyy:
+Voit kopioida johonkin sovellukseen liittyvän salasanan clip-boardiin painamalla copy-nappia joka näkyy kuvassa Edit-napin vasemmalla puolella.
 
-![alt text](https://github.com/oskari83/ot-harjoitustyo/blob/master/pwmanager-app/pictures/ohje5.png?raw=true)
+![alt text](https://github.com/oskari83/ot-harjoitustyo/blob/master/pwmanager-app/pictures/kuva1.png?raw=true)
+
+## Salasanan poistaminen
+
+Voit poistaa salasanan painamalla ensin Edit-nappia kuten näkyy:
+
+![alt text](https://github.com/oskari83/ot-harjoitustyo/blob/master/pwmanager-app/pictures/kuva1.png?raw=true)
+
+Jonka jälkeen Delete-nappia painamalla salasana poistuu lopullisesti (ole siis varovainen).
+
+![alt text](https://github.com/oskari83/ot-harjoitustyo/blob/master/pwmanager-app/pictures/kuva2.png?raw=true)
+
+## Salasanan muuttaminen
+
+Voit muutta sovellukseen liittyvää salasanaa painamalla ensin Edit-nappia kuten näkyy:
+
+![alt text](https://github.com/oskari83/ot-harjoitustyo/blob/master/pwmanager-app/pictures/kuva1.png?raw=true)
+
+Jonka jälkeen tekstikenttään voit kirjoittaa uuden salasanan ja Save-nappia painamalla tallentuu uusi salasana tietokantaan. Voit myös perua salasanan muuttamisen painamalla Cancel-nappia sen oikealla puolella.
+
+![alt text](https://github.com/oskari83/ot-harjoitustyo/blob/master/pwmanager-app/pictures/kuva2.png?raw=true)
 
 ## Uloskirjautuminen
 
