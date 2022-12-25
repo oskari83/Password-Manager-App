@@ -16,30 +16,30 @@ Toinen näkymä (`CreateAccountView`) on sisäänkirjautumisnäkymään liittyv�
 
 Kolmas päänäkymä (`PasswordsView`) on sovelluksen päänäkymä sillä sisäänkirjauduttuaan, käyttäjä näkee tässä näkymässä kaikki hänen tallentamat sovellusten salasanat listana. Näkymän ylälaidassa hän näkee myös oman käyttäjänimensä ja uloskirjautumisnapin. Alalaidassa hän voi antaa uuden sovelluksen nimen ja salasanan joka tallenetaan sovellukseen ja siihe liittyvän napin. 
 
-Jokainen näkymä on oma luokkansa, joita hallitsee ylä-luokka `UI`, eli jonka vastuulla on näiden kolmen näkymän välillä vaihtaminen. Kaikki käyttöliittymän toiminnallisuus on eriytetty siten, että se kutsuu vain `UserService` luokan metodeja. 
+Jokainen näkymä on oma luokkansa, joita hallitsee ylä-luokka `UI`, eli jonka vastuulla on näiden kolmen näkymän välillä vaihtaminen. Kaikki käyttöliittymän toiminnallisuus on eriytetty siten, että se kutsuu vain `UserService` sekä `PasswordService` luokan metodeja. 
 
 ## Sovelluslogiikka
 
 Sovelluksen tietomalli perustuu kahteen luokkaan: `User` ja `Password`. `User` kuvaa käyttäjätunnusta ja sisältää käyttäjän käyttäjänimen ja salasanan merkkijonona. `Password` taas kuvaa käyttäjän tallentamaa salasananaa sisältämällä itse salasanan, salasanaan liittyvän sovelluksen nimen, ja käyttäjänimen käyttäjäst jolle se kuuluu merkkijonona.
 
-Sovelluslogiikka perustuu `UserService` luokan metodeihin.
+Sovelluslogiikka perustuu `UserService` sekä `PasswordService` luokan metodeihin. Esimerkiksi:
 - Sisäänkirjautuminen tapahtuu `authenticate(username, password_input)` metodilla
 - Salasanan lisääminen `add_password(app_input, password_input)` metodilla
 - jne.
 
-Eri luokkien ja pakkausten suhdetta kuvaava luokka/pakkauskaavio:
+Eri luokkien ja pakkausten suhdetta kuvaava luokka/pakkauskaavio (Huom. kaaviosta puuttuu services kansiosta PasswordService sekä EncryptionService luokat):
 
 ![alt text](https://github.com/oskari83/ot-harjoitustyo/blob/master/pwmanager-app/pictures/new_architecture.png?raw=true)
 
 ## Tiedon tallennus
 
-Sovellus tallentaa kaiken datan pysyvästi Sqlite tietokantaan. Tietokantaa käsittelevät `UserRepository` ja `PasswordRepository` jotka yhdessä tarjoavat `UserService` luokalle metodeja tallentamiseen/hakemiseen/poistamiseen.
+Sovellus tallentaa kaiken datan pysyvästi Sqlite tietokantaan. Tietokantaa käsittelevät `UserRepository` ja `PasswordRepository` jotka yhdessä tarjoavat `UserService` ja `PasswordService` luokille metodeja tallentamiseen/hakemiseen/poistamiseen. Sovelluksen käyttäjätunnusten ns. "master-passwordit" eli salasanat on encryptattu tietokantaan `EncryptionService` luokan avulla, joka myös tarkistaa salasanan oikeuden sisäänkirjautuessa.
 
 ## Toiminnallisuus
 
 ### Sisäänkirjautuminen
 
-Käyttäjä voi kirjautua sisään sovellukseen kirjoittamalla merkkijonoja käyttäjänimeksi ja salasanaksi. Tämän jälkeen jos käyttäjä painaa nappia, kutsuu `UI` luokan hallitsema `LoginView` luokkaa annetuilla merkkijonoilla `UserService` luokan `authenticate(username,password_input)` metodia, joka taas kutsuu `UserRepository` luokkaa metodilla `find_user(username_input)` hakeakseen käyttäjänimeen liitetyn salasanan tietokannasta. `UserService` sitten vertaa näitä salasanoja keskenään, ja jos nämä ovat samat, tallettaa käyttäjän muuttujaan ja palauttaa `User` luokan instanssin käyttöliittymälle indikoiden että sisäänkirjautuminen onnistui. Tämän jälkeen `UI` luokka tietää vaihtaa näkymää `PasswordsView` luokan määrittelemäksi eli päänäkymäksi.
+Käyttäjä voi kirjautua sisään sovellukseen kirjoittamalla merkkijonoja käyttäjänimeksi ja salasanaksi. Tämän jälkeen jos käyttäjä painaa nappia, kutsuu `UI` luokan hallitsema `LoginView` luokkaa annetuilla merkkijonoilla `UserService` luokan `authenticate(username,password_input)` metodia, joka taas kutsuu `UserRepository` luokkaa metodilla `find_user(username_input)` hakeakseen käyttäjänimeen liitetyn salasanan tietokannasta. `UserService` sitten vertaa näitä salasanoja keskenään hyödyntäen `EncryptionService` luokkaa, ja jos nämä ovat samat, tallettaa käyttäjän muuttujaan ja palauttaa `User` luokan instanssin käyttöliittymälle indikoiden että sisäänkirjautuminen onnistui. Tämän jälkeen `UI` luokka tietää vaihtaa näkymää `PasswordsView` luokan määrittelemäksi eli päänäkymäksi.
 
 Seuraava sekvenssidiagrammi havannoi toimintaa:
 
@@ -47,9 +47,9 @@ Seuraava sekvenssidiagrammi havannoi toimintaa:
 
 ### Salasanan lisääminen
 
-Käyttäjä voi lisätä salasanan sovellukseen antamalla sovelluksen nimen ja salasanan merkkijonoina ja sitten painamalla Add-nappia käyttöliittymässä. Mahdollisesti käyttäjä voi myös autogeneroida salasanan painamalla ensin Generate-nappia. Tämän jälkeen kutsuu `UI` luokan hallitsema `PasswordsView` luokka `UserService` luokkaa metodilla `add_password(app_input, password_input)`, joka taas paketoi tiedon `Password` luokan instanssiin ja lähettää datan eteenpäin `PasswordRepository` luokalle metodilla `insert_password(password)`, joka vihdoin tallettaa salasanan tietokantaan. Tämän onnistumisesta indikoi sekä `PasswordRepository` ja `UserService` palauttamalla `Password` luokan instanssin takaisinpäin. `PasswordsView` sitten poistaa mahdollisen error-notifikaation ja uuddelleen renderöi listan salasanoja kutsumalla `_initialize_password_list()` funktiota. 
+Käyttäjä voi lisätä salasanan sovellukseen antamalla sovelluksen nimen ja salasanan merkkijonoina ja sitten painamalla Add-nappia käyttöliittymässä. Mahdollisesti käyttäjä voi myös autogeneroida salasanan painamalla ensin Generate-nappia. Tämän jälkeen kutsuu `UI` luokan hallitsema `PasswordsView` luokka `PasswordService` luokkaa metodilla `add_password(app_input, password_input)`, joka taas paketoi tiedon `Password` luokan instanssiin ja lähettää datan eteenpäin `PasswordRepository` luokalle metodilla `insert_password(password)`, joka vihdoin tallettaa salasanan tietokantaan. Tämän onnistumisesta indikoi sekä `PasswordRepository` ja `PasswordService` palauttamalla `Password` luokan instanssin takaisinpäin. `PasswordsView` sitten poistaa mahdollisen error-notifikaation ja uuddelleen renderöi listan salasanoja kutsumalla `_initialize_password_list()` funktiota. 
 
-Seuraava sekvenssidiagrammi havannoi toimintaa:
+Seuraava sekvenssidiagrammi (huom. PasswordService on kuvassa virheellisesti nimellä UserService, kaikki muu on oikein) havannoi toimintaa:
 
 ![alt text](https://github.com/oskari83/ot-harjoitustyo/blob/master/pwmanager-app/pictures/password_add.png?raw=true)
 

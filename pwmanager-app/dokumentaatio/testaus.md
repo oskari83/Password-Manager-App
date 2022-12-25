@@ -31,7 +31,7 @@ Sovellusta on suoritettu ja testattu [käyttöohjeen](https://github.com/oskari8
 
 ### Toiminnallisuudet
 
-Kaikki [määrittelydokumentin](https://github.com/oskari83/ot-harjoitustyo/tree/master/pwmanager-app/dokumentaatio/vaatimusmäärittely.md) ja käyttöohjeessa selitetyt toiminnallisuudet on käyty lävitse. Kaikkien tekstikenttien kohdalla on kentät yritetty täyttää virheellisillä kuten tyhjillä arvoilla.
+Kaikki [määrittelydokumentin](https://github.com/oskari83/ot-harjoitustyo/tree/master/pwmanager-app/dokumentaatio/vaatimusmaarittely.md) ja käyttöohjeessa selitetyt toiminnallisuudet on käyty lävitse. Kaikkien tekstikenttien kohdalla on kentät yritetty täyttää virheellisillä kuten tyhjillä arvoilla.
 
 ## Sovellukseen jääneet laatuongelmat
 
