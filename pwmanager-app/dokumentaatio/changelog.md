@@ -50,4 +50,12 @@
 
 ## Loppupalautus
 
-- 
+- Käyttäjien master-passwordit eli salasanat joilla he kirjautuvat sovellukseen encryptattu bcrypt kirjastolla
+- Lisätty metodi update_password PasswordRepository luokkaan (jonkin sovelluksen) salasanan vaihtamiseen käyttäen sqliten UPDATE komentoa
+- Lisätty luokka EncryptionService joka toteuttaa bcrypt kirjatoa käyttäen salasanojen encryptoinnin
+- Eriytetty käyttäjien ja käyttäjän salasanojen hallinnointi UserService ja PasswordService luokkiin (ennen UserService vastasi molemmista)
+- PasswordService luokkaan siirretty UserService luokasta kuuluvat metodit ja lisätty change_password salasanan muuttamiseen
+- UserService luokan authenticate ja create_account metodeja muutettu toteuttamaan encryptaus ja encryptatun salasanana tallentaminen tietokantaan
+- Bugi korjattu missä käyttäjä voi lisätä samalle sovelluksen nimelle (esim Google) kaksi eri salasanaa, toteutettu varmistamalla että sovelluksen nimi on uniikki tietokannassa kun lisätään uutta salasanaa käyttäjän toimesta
+- Toteutettu PasswordListView luokkaan muutoksia joka mahdollistaa salasanojen muuttamisen luonnin jälkeen 
+- Lisätty toiminnallisuus että käyttäjätunnuksen luonnissa käyttäjä kirjataan automaattisesti sisään, eli sovellus ei vaadi tunnuksen luonnin jälkeen sisäänkirjautumista
