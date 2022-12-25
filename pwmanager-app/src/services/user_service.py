@@ -8,15 +8,15 @@ from repositories.user_repository import (
 )
 
 class UserService:
-    """Luokka, joka mahdollistaa käyttäjien luonnin, hallinnan, tunnistautumisen
-    sekä yksittäisten salasanojen lisäämisen ja poiston.
+    """Luokka, joka mahdollistaa käyttäjien luonnin, hallinnan, ja tunnistautumisen.
     """
 
     def __init__(self, repository_mode=0):
-        """Luokan konstruktori joka asettaa käyttäjä sekä salasana repositoriot sekä
-        ylläpitää kirjautunutta käyttäjää muuttujissa. Repository mode defaulttaa 0 normaali
-        käytössä, testeissä kuitenkin asetetaan 1 jotta testit käyttävät oikeaa tietokantaa.
+        """Luokan konstruktori joka asettaa käyttäjä repositorion sekä
+        ylläpitää kirjautunutta käyttäjää muuttujassa. Repository mode defaulttaa 0 normaali
+        käytössä, mutta testeissä kuitenkin asetetaan 1 jotta testit käyttävät oikeaa tietokantaa.
         """
+
         self._user_repo = None
 
         if repository_mode==0:
@@ -61,15 +61,22 @@ class UserService:
         """
 
         user_account = self._user_repo.find_user(username)
-        if not user_account or encryption_service.password_match_comparison(password_input,user_account.password) == False:
+        if not user_account:
+            return None
+        if encryption_service.password_match_comparison(
+            password_input,
+            user_account.password
+        ) is False:
             return None
         self._current_user = user_account
         password_service.set_user(user_account)
         return user_account
 
     def logout(self):
-        """Kirjaa käyttäjän ulos sovelluksesta.
+        """Kirjaa käyttäjän ulos sovelluksesta. Asettaa muuttujan current_user
+        None:ksi indikoimaan tätä.
         """
+
         password_service.remove_user()
         self._current_user = None
 

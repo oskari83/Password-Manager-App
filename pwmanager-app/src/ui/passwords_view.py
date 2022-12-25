@@ -100,6 +100,9 @@ class PasswordsView:
         ja _create_password_input_app), tallettaa UserService luokan referenssin muuttujaan,
         ja luo nappeihin ja teksteihin tarvittavat UI tyylit (_bold10 ja _error_font).
 
+        Luo app_edit_mode dictionaryn joka ylläpitää tietoa siitä, että onko käyttäjä vaihtamassa
+        jonkin sovelluksen salasanaa ja näyttää vastaavaan tilanteeseen kuuluvan UI:n.
+
         Args:
             root (ThemedTK): ThemedTk pääinstanssi joka on luotu main.py Main metodissa
             handle_logout (metodi): käyttäjän uloskirjautumisen napin painamisen event handleri
@@ -137,10 +140,14 @@ class PasswordsView:
         self._frame.destroy()
 
     def _show_error(self, message):
+        """Näyttää virheilmoituksen annetulla tekstillä käyttöliittymässä"""
+
         self._error_variable.set(message)
         self._error_label.grid()
     
     def _hide_error(self):
+        """Poistaa virheilmoituksen käyttöliittymästä"""
+
         self._error_label.grid_remove()
 
     def _logout_handler(self):
@@ -152,14 +159,27 @@ class PasswordsView:
         self._handle_logout()
 
     def _handle_edit_password(self, password_app):
+        """Päivittää listan salasanoista jotta käyttäjä voi muuttaa
+        haluamaansa salasanaa.
+        """
+
         self._app_edit_mode[password_app] = 1
         self._initialize_password_list()
 
     def _handle_cancel_edit_password(self, password_app):
+        """Päivittää listan salasanoista jotta käyttäjä voi perua
+        haluavansa muuttaa jotain salasanaa.
+        """
+
         self._app_edit_mode[password_app] = 0
         self._initialize_password_list()
 
     def _handle_update_password(self, password):
+        """Päivittää käyttäjän haluaman salasanan, mutta tarkistaa
+        ensin että salasana ei ole tyhjä, jonka jälkeen antaa tiedon
+        PasswordService luokalle.
+        """
+
         if len(password.password) == 0:
             self._show_error(f"Error, cannot update password. Empty password for App: {password.app} .")
             return
@@ -169,7 +189,7 @@ class PasswordsView:
         self._initialize_password_list()
 
     def _handle_delete_password(self, password_app):
-        """Välittää sovelluksen nimen UserServicelle johon liittyvä
+        """Välittää sovelluksen nimen PasswordServicelle johon liittyvä
         salasana halutaan poistaa.
 
         Args:
@@ -220,7 +240,7 @@ class PasswordsView:
     
     def _handle_create_password(self):
         """Tarkistaa että käyttäjä on kirjoittanut jotain merkkejä salasanan sovelluksen
-        nimeksi ja itse salasanaksi ja välittää nämä merkkijonot sitten UserServicelle
+        nimeksi ja itse salasanaksi ja välittää nämä merkkijonot sitten PasswordServicelle
         jotta ne voidaan tallentaa sovellukseen.
         """
 

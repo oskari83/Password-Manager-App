@@ -53,10 +53,14 @@ class LoginView:
             self._show_error("Username or password incorrect")
 
     def _show_error(self, message):
+        """Näyttää virheilmoituksen annetulla tekstillä käyttöliittymässä"""
+        
         self._error_variable.set(message)
         self._error_label.grid()
     
     def _hide_error(self):
+        """Poistaa virheilmoituksen käyttöliittymästä"""
+
         self._error_label.grid_remove()
 
     def _initialize_username_field(self):

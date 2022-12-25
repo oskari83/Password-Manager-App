@@ -3,6 +3,7 @@ class Password:
     sovelluksen nimi johon salasana liittyy, ja käyttäjänimi johon salasana
     liittyy.
     """
+    
     def __init__(self, app, password, username):
         self.app = app
         self.password = password

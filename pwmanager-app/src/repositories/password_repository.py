@@ -106,6 +106,16 @@ class PasswordRepository:
         return password
 
     def update_password(self, password):
+        """Päivittää sovellukseen liittyvän salasanan tietokannassa, eli mahdollistaa salasanan
+        muuttamisen käyttäjän toimesta.
+
+        Args:
+            password (Password): annetun salasanan Password luokan instanssi, joka sisältää
+            muutetun salasanan
+
+        Returns:
+            Password: palauttaa Password luokan instanssin tietokantaan päivitetystä salasanasta
+        """
         cursor = self._connection.cursor()
         sql = "UPDATE passwords SET password = ? WHERE username=? AND app=?"
         cursor.execute(sql, (password.password, password.username, password.app))

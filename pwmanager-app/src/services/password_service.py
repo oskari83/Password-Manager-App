@@ -7,14 +7,15 @@ from repositories.password_repository import (
 )
 
 class PasswordService:
-    """Luokka, joka mahdollistaa käyttäjien luonnin, hallinnan, tunnistautumisen
-    sekä yksittäisten salasanojen lisäämisen ja poiston.
+    """Luokka, joka mahdollistaa salasanojen lisäämisen, poiston, muuttamisen
+    sekä kaikkien salasanojen listaamisen sisäänkirjautuneen käyttäjän toimesta.
     """
 
     def __init__(self, repository_mode=0):
-        """Luokan konstruktori joka asettaa käyttäjä sekä salasana repositoriot sekä
-        ylläpitää kirjautunutta käyttäjää muuttujissa. Repository mode defaulttaa 0 normaali
-        käytössä, testeissä kuitenkin asetetaan 1 jotta testit käyttävät oikeaa tietokantaa.
+        """Luokan konstruktori joka asettaa salasana repositorion sekä
+        ylläpitää kirjautunutta käyttäjää muuttujassa _current_user. Repository mode defaulttaa 0
+        normaali käytössä, mutta testeissä kuitenkin asetetaan 1 jotta testit käyttävät
+        oikeaa tietokantaa.
         """
 
         self._password_repo = None
@@ -27,7 +28,7 @@ class PasswordService:
         self._logged_in = False
         self._current_user = None
 
-    def add_password(self, app_input,password_input):
+    def add_password(self, app_input, password_input):
         """Lisää salasanan sovellukseen sillä hetkellä kirjautuneelle käyttäjälle.
 
         Args:
@@ -37,6 +38,8 @@ class PasswordService:
         Returns:
             Password: palauttaa Password luokan instanssin luodusta salasanasta, paitsi
             jos sovellukseen ei ole kirjautunut kukaan käyttäjä, jolloin palauttaa None.
+            Palauttaa myös None jos yritetään lisätä uusi salasana sovellukselle joka on
+            jo tietokannassa.
         """
 
         if not self._logged_in:
@@ -69,6 +72,19 @@ class PasswordService:
         return "Password entry deleted successfully"
 
     def change_password(self, password):
+        """Päivittää eli muuttaa käyttäjän valitsemaa (sovellukseen liittyvää)
+        salasanaa tietokannassa.
+
+        Args:
+            password (Password): Password luokan instanssi joka sisältää muutetun salasanan
+            propertyssa password
+
+        Returns:
+            Password: Palauttaa Password luokan instanssin jos muutos onnistui, jos kuitenkaan
+            käyttäjä ei ole kirjautunut sisään tai annetulla sovelluksen nimellä ei löytynyt
+            salasanaa palauttaa None.
+        """
+
         if not self._logged_in:
             return None
         password_item = self._password_repo.find_password(password.app, self._current_user.username)
@@ -83,16 +99,27 @@ class PasswordService:
         Returns:
             lista: palauttaa listan Password luokan instansseja
         """
+
         if not self._logged_in:
             return None
         password_list = self._password_repo.find_all(self._current_user.username)
         return password_list
 
     def set_user(self, user:User):
+        """Asettaa käyttäjän muuttujaan ja muuttaa sisäänkirjautumisen statusta,
+        jotta voimme muissa metodeissa varmistaa että käyttäjä on sisäänkirjautunut.
+
+        Args:
+            user (User): User luokan instanssi sisäänkirjautuneesta käyttäjästä.
+        """
+
         self._logged_in = True
         self._current_user = user
 
     def remove_user(self):
+        """Poistaa käyttäjän muuttujasta ja päivittää sisäänkirjautumisen statusta.
+        """
+
         self._logged_in = False
         self._current_user = None
 
