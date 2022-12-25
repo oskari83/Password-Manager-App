@@ -41,7 +41,7 @@ class EncryptionService:
         Returns:
             boolean: palauttaa True jos matchaavat, False jos eivät.
         """
-        
+
         encoded_password = self._encode_password(password_string)
         return bcrypt.checkpw(encoded_password, hash_string)
 

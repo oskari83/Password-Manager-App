@@ -11,7 +11,7 @@ def get_user_by_row(row):
         User: Palauttaa User luokan instanssin tietokannasta haetun datan perusteella,
         paitsi jos dictionary data on annettu, muuten palauttaa None.
     """
-    
+
     return User(row["username"], row["password"]) if row else None
 
 
