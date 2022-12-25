@@ -8,4 +8,5 @@
 | 29.11. | 5    | käyttäjätunnukset tietokannassa, logiikka ja tallennus tietokantaan salasanojen lisäämiselle lisätty |
 | 6.12. | 5    | vanha konsoli-käyttöliittymä poistettu ja uusi visuaalinen käyttöliittymä koodattu sen tilalle tkinter kirjastoa hyödyntäen |
 | 13.12. | 7    | visuaalinen käyttöliittymä viimeistelty, salasanan kopioiminen ja autogeneroiminen lisätty |
-| yht   | 22   | |
+| 25.12. | 6    | salasanojen muuttaminen sekä master-salasanojen encryptaus toteutettu, bugikorjauksia ja refactorointia, testien lisäämistä |
+| yht   | 28   | |
